@@ -148,7 +148,7 @@ export default defineConfig(async ({ command, mode, isSsrBuild, isPreview }) => 
             case "web":
                 return {
                     ...baseConfig,
-                    base: "/Hash-Checker/",
+                    base: "/Super-Hash/",
                     define: {
                         VERSION_NAME: JSON.stringify(packageJson.version),
                         VARIANT: JSON.stringify("web"),
