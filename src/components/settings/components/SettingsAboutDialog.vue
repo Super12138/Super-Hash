@@ -72,7 +72,7 @@ const copyVersion = () => {
 
         <p style="margin-top: 1.5rem">
             {{ t("settings.about.dialog.source-code.prefix") }}
-            <a target="_blank" href="https://github.com/Super12138/Hash-Checker/">GitHub</a>
+            <a target="_blank" href="https://github.com/Super12138/Super-Hash/">GitHub</a>
             {{ t("settings.about.dialog.source-code.suffix") }}
             <br />
             {{ t("settings.about.dialog.author.prefix") }}

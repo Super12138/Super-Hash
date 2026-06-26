@@ -1,13 +1,13 @@
 <p align="center">
-    <img src="https://cdn.jsdelivr.net/gh/Super12138/Hash-Checker@fd35e8a/build/appicon.svg" width="30%">
+    <img src="https://cdn.jsdelivr.net/gh/Super12138/Super-Hash@fd35e8a/build/appicon.svg" width="30%">
 </p>
 
 # Super Hash (formerly Hash Checker)
 
-![GitHub](https://img.shields.io/github/license/Super12138/Hash-Checker?style=flat-square)
-![GitHub all releases](https://img.shields.io/github/downloads/Super12138/Hash-Checker/total?style=flat-square)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/Super12138/Hash-Checker?style=flat-square)
-![GitHub language count](https://img.shields.io/github/languages/count/Super12138/Hash-Checker?style=flat-square)
+![GitHub](https://img.shields.io/github/license/Super12138/Super-Hash?style=flat-square)
+![GitHub all releases](https://img.shields.io/github/downloads/Super12138/Super-Hash/total?style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/Super12138/Super-Hash?style=flat-square)
+![GitHub language count](https://img.shields.io/github/languages/count/Super12138/Super-Hash?style=flat-square)
 
 A quick, readily available cross-platform hash checker that follows Material Design 3
 <br>
@@ -30,8 +30,8 @@ A quick, readily available cross-platform hash checker that follows Material Des
 
 **It is strongly recommended to download/use Super Hash from the official channels below**
 
-- Offline version V3.0.0[GitHub Release](https://github.com/Super12138/Hash-Checker/releases)
-- Online version V3.0.0[Github Page](https://super12138.github.io/Hash-Checker/)
+- Offline version V3.0.0[GitHub Release](https://github.com/Super12138/Super-Hash/releases)
+- Online version V3.0.0[Github Page](https://super12138.github.io/Super-Hash/)
 
 You can also download it from the Microsoft Store:
 <a href="https://apps.microsoft.com/detail/9nqq6z539qv2?referrer=appbadge&mode=direct">

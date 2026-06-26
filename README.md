@@ -1,13 +1,13 @@
 <p align="center">
-    <img src="https://cdn.jsdelivr.net/gh/Super12138/Hash-Checker@fd35e8a/build/appicon.svg" width="30%">
+    <img src="https://cdn.jsdelivr.net/gh/Super12138/Super-Hash@fd35e8a/build/appicon.svg" width="30%">
 </p>
 
 # Super Hash（原名 Hash Checker）
 
-![许可证](https://img.shields.io/github/license/Super12138/Hash-Checker?style=flat-square)
-![GitHub Releases 总下载量](https://img.shields.io/github/downloads/Super12138/Hash-Checker/total?style=flat-square)
-![最新 GitHub Release](https://img.shields.io/github/v/release/Super12138/Hash-Checker?style=flat-square)
-![编程语言使用统计](https://img.shields.io/github/languages/count/Super12138/Hash-Checker?style=flat-square)
+![许可证](https://img.shields.io/github/license/Super12138/Super-Hash?style=flat-square)
+![GitHub Releases 总下载量](https://img.shields.io/github/downloads/Super12138/Super-Hash/total?style=flat-square)
+![最新 GitHub Release](https://img.shields.io/github/v/release/Super12138/Super-Hash?style=flat-square)
+![编程语言使用统计](https://img.shields.io/github/languages/count/Super12138/Super-Hash?style=flat-square)
 
 一个快速、随时可用，且遵循 Material Design 3 的跨平台文件校验器
 <br>
@@ -30,8 +30,8 @@
 
 **强烈建议从下方官方渠道下载/访问 Super Hash**
 
-- 离线版 V3.0.0[GitHub Release](https://github.com/Super12138/Hash-Checker/releases)
-- 在线版 v3.0.0[Github Page](https://super12138.github.io/Hash-Checker/)
+- 离线版 V3.0.0[GitHub Release](https://github.com/Super12138/Super-Hash/releases)
+- 在线版 v3.0.0[Github Page](https://super12138.github.io/Super-Hash/)
 
 也可以在 Microsoft Store 里下载：
 <a href="https://apps.microsoft.com/detail/9nqq6z539qv2?referrer=appbadge&mode=direct">

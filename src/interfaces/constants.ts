@@ -1,7 +1,7 @@
 import type { Language } from "./Language";
 import type { OpenSourceLibrary } from "./OpenSourceLibrary";
 
-export const UPDATE_URL = "https://api.github.com/repos/Super12138/Hash-Checker/releases/latest";
+export const UPDATE_URL = "https://api.github.com/repos/Super12138/Super-Hash/releases/latest";
 
 export const APP_LANGUAGES: Language[] = [
     {

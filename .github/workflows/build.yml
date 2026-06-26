@@ -2,18 +2,19 @@ name: Build Desktop App
 
 on:
   push:
-    branches: [ "main" ]
-    paths-ignore: [ "**.md", "LICENSE", ".gitignore", ".github/ISSUE_TEMPLATE/**"]
+    branches: ["main"]
+    paths-ignore:
+      ["**.md", "LICENSE", ".gitignore", ".github/ISSUE_TEMPLATE/**"]
   pull_request:
-    branches: [ "main" ]
-    paths-ignore: [ "**.md", "LICENSE", ".gitignore", ".github/ISSUE_TEMPLATE/**"]
+    branches: ["main"]
+    paths-ignore:
+      ["**.md", "LICENSE", ".gitignore", ".github/ISSUE_TEMPLATE/**"]
   workflow_dispatch:
 
 env:
   NODE_OPTIONS: "--max-old-space-size=4096"
   TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
   TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
-
 
 jobs:
   build:
@@ -23,33 +24,33 @@ jobs:
         include:
           # Windows x64
           - platform: windows-latest
-            name: 'Windows x64'
-            args: ''
+            name: "Windows x64"
+            args: ""
 
           # Windows x32
           - platform: windows-latest
-            name: 'Windows x32'
-            args: '--target i686-pc-windows-msvc'
+            name: "Windows x32"
+            args: "--target i686-pc-windows-msvc"
 
           # Windows arm64
           # - platform: windows-latest
-            # name: 'Windows arm64'
-            # args: '--target aarch64-pc-windows-msvc'
+          # name: 'Windows arm64'
+          # args: '--target aarch64-pc-windows-msvc'
 
           # 通用版
           - platform: macos-latest
-            name: 'macOS Universal'
-            args: '--target universal-apple-darwin'
+            name: "macOS Universal"
+            args: "--target universal-apple-darwin"
 
           # Apple 芯片版（Arm 架构）
           - platform: macos-latest
-            name: 'macOS arm64'
-            args: '--target aarch64-apple-darwin'
+            name: "macOS arm64"
+            args: "--target aarch64-apple-darwin"
 
           # Intel 芯片版
           - platform: macos-latest
-            name: 'macOS x64'
-            args: '--target x86_64-apple-darwin'
+            name: "macOS x64"
+            args: "--target x86_64-apple-darwin"
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -91,11 +92,11 @@ jobs:
         #  releaseName: __VERSION__
         #  releaseBody: ""
         #  releaseDraft: true
-        env: 
+        env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Upload artifact
-        if: success() && github.event_name != 'pull_request' && github.repository == 'Super12138/Hash-Checker'
+        if: success() && github.event_name != 'pull_request' && github.repository == 'Super12138/Super-Hash'
         uses: actions/upload-artifact@v7.0.1
         with:
           name: ${{ matrix.name }}
