@@ -37,7 +37,7 @@ const getVersionInfo = async () => {
 };
 
 // https://vite.dev/config/
-export default defineConfig(async ({ command, mode, isSsrBuild, isPreview }) => {
+export default defineConfig(async ({ command, mode }) => {
     const { versionCode, commitHash } = await getVersionInfo();
 
     const baseConfig: UserConfig = {
@@ -104,7 +104,7 @@ export default defineConfig(async ({ command, mode, isSsrBuild, isPreview }) => 
             },
         },
         build: {
-            rollupOptions: {
+            rolldownOptions: {
                 output: {
                     manualChunks(id) {
                         if (id.includes("mdui")) {
