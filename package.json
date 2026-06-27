@@ -14,7 +14,9 @@
         "type-check": "vue-tsc --build",
         "preview": "vite preview",
         "tauri": "tauri",
-        "format": "oxfmt"
+        "format": "oxfmt",
+        "lint": "oxlint",
+        "lint:fix": "oxlint --fix"
     },
     "dependencies": {
         "@mdui/icons": "^1.0.3",
@@ -44,6 +46,7 @@
         "@vue/tsconfig": "^0.9.1",
         "npm-run-all2": "^9.0.2",
         "oxfmt": "^0.56.0",
+        "oxlint": "^1.71.0",
         "typescript": "^6.0.3",
         "vite": "^8.1.0",
         "vite-plugin-html": "^3.2.2",

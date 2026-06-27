@@ -3,14 +3,14 @@
     "explorer.fileNesting.patterns": {
         "tsconfig.json": "tsconfig.*.json, env.d.ts",
         "vite.config.*": "jsconfig*, vitest.config.*, cypress.config.*, playwright.config.*",
-        "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .prettier*, prettier*, .editorconfig"
+        "package.json": "package-lock.json, pnpm*, .yarnrc*, yarn*, .eslint*, eslint*, .oxlint*, oxlint*, .prettier*, prettier*, .oxfmt*, oxfmt*, .editorconfig"
     },
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
     "html.customData": ["./node_modules/mdui/html-data.zh-cn.json"],
     "css.customData": ["./node_modules/mdui/css-data.zh-cn.json"],
     "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     },
     "i18n-ally.localesPaths": ["src/locales"],
     "i18n-ally.keystyle": "nested",
@@ -19,9 +19,9 @@
         "editor.defaultFormatter": "tamasfe.even-better-toml"
     },
     "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     },
     "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     }
 }
