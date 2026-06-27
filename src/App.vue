@@ -15,7 +15,12 @@
 
 import "mdui/components/layout-main.js";
 import "mdui/components/layout.js";
+import { useWebWorker } from "@vueuse/core";
+import { setColorScheme } from "mdui";
+import { computed, onMounted, onUnmounted, ref, watch, type Ref } from "vue";
+import { useI18n } from "vue-i18n";
 
+import { FileItem } from "./components/file/FileItem";
 import FileOutputDrawer from "./components/file/FileOutputDrawer.vue";
 import AlgorithmDropdown from "./components/main/AlgorithmSelect.vue";
 import CheckButton from "./components/main/CheckButton.vue";
@@ -26,25 +31,15 @@ import ModeDropdown from "./components/main/ModeSelect.vue";
 import SettingsDrawer from "./components/settings/SettingsDrawer.vue";
 import PWABadage from "./components/shared/PWABadage.vue";
 import SimpleDialog from "./components/shared/SimpleDialog.vue";
-
-import { computed, onMounted, onUnmounted, ref, watch, type Ref } from "vue";
-
-import { setColorScheme } from "mdui";
-
-import { FileItem } from "./components/file/FileItem";
+import UpdateDialog from "./components/update/UpdateDialog.vue";
 import { toAlgorithm } from "./interfaces/Algorithms";
 import { FileStatus } from "./interfaces/FileStatus";
 import { toMode } from "./interfaces/Modes";
 import type { MainPostData, ProgressInfo, WorkerPostData } from "./interfaces/WorkerMessage";
 import { WorkerResult } from "./interfaces/WorkerResults";
-
 import { useCacheSizeStore } from "./stores/settings/cacheSize";
 import { useThemeColorStore } from "./stores/settings/themeColor";
 import { useFileConfigurationStore } from "./stores/ui/file-configuration";
-
-import { useWebWorker } from "@vueuse/core";
-import { useI18n } from "vue-i18n";
-import UpdateDialog from "./components/update/UpdateDialog.vue";
 
 let fileList: Ref<FileItem[]> = ref<FileItem[]>([]);
 const openTipDialog = ref(false);
@@ -132,7 +127,7 @@ const checkConfigurationIsVaild = () => {
     if (!fileList.value[fileList.value.length - 1]) return;
     fileList.value[fileList.value.length - 1].status = FileStatus.Computing;
     fileList.value[fileList.value.length - 1].algorithm = toAlgorithm(
-        fileConfigurationStore.algorithm,
+        fileConfigurationStore.algorithm
     );
     fileList.value[fileList.value.length - 1].mode = toMode(fileConfigurationStore.mode);
     fileList.value[fileList.value.length - 1].checkSum = fileConfigurationStore.checkSum;
@@ -175,7 +170,7 @@ themeColorStore.$subscribe(
     (mutation, state) => {
         setColorScheme(state.color);
     },
-    { immediate: true },
+    { immediate: true }
 );
 
 onMounted(() => {

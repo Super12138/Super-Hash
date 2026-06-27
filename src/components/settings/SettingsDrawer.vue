@@ -2,8 +2,16 @@
 import "mdui/components/button-icon.js";
 import "mdui/components/list.js";
 import "mdui/components/navigation-drawer.js";
-
 import "@mdui/icons/close--outlined.js";
+import type { NavigationDrawer } from "mdui/components/navigation-drawer.js";
+import { useTemplateRef } from "vue";
+import { useI18n } from "vue-i18n";
+
+import { useAlgorithmSuggestStore } from "@/stores/settings/algorithmSuggest";
+import { useAutoCopyStore } from "@/stores/settings/autoCopy";
+import { useAutoUpdateStore } from "@/stores/settings/autoUpdate";
+import { useCacheSizeStore } from "@/stores/settings/cacheSize";
+import { useSystemNotificationStore } from "@/stores/settings/systemNotification";
 
 import SettingsAbout from "./components/SettingsAbout.vue";
 import SettingsAlgorithmSuggest from "./components/SettingsAlgorithmSuggest.vue";
@@ -15,16 +23,6 @@ import SettingsLanguage from "./components/SettingsLanguage.vue";
 import SettingsReset from "./components/SettingsReset.vue";
 import SettingsSystemNotification from "./components/SettingsSystemNotification.vue";
 import SettingsThemeColor from "./components/SettingsThemeColor.vue";
-
-import { useAlgorithmSuggestStore } from "@/stores/settings/algorithmSuggest";
-import { useAutoCopyStore } from "@/stores/settings/autoCopy";
-import { useAutoUpdateStore } from "@/stores/settings/autoUpdate";
-import { useCacheSizeStore } from "@/stores/settings/cacheSize";
-import { useSystemNotificationStore } from "@/stores/settings/systemNotification";
-
-import { useI18n } from "vue-i18n";
-import { useTemplateRef } from "vue";
-import type { NavigationDrawer } from "mdui/components/navigation-drawer.js";
 
 const cacheSizeStore = useCacheSizeStore();
 const algorithmSuggestStore = useAlgorithmSuggestStore();

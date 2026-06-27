@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import "mdui/components/dialog.js";
 import "mdui/components/divider.js";
-
-import type { Dialog } from "mdui/components/dialog.js";
-import { computed } from "vue";
-
-import { useTemplateRef } from "vue";
-import { useI18n } from "vue-i18n";
-import { OPEN_SOURCE_LIBRARIES } from "@/interfaces/constants";
 import { useClipboard } from "@vueuse/core";
 import { snackbar } from "mdui";
+import type { Dialog } from "mdui/components/dialog.js";
+import { computed } from "vue";
+import { useTemplateRef } from "vue";
+import { useI18n } from "vue-i18n";
+
+import { OPEN_SOURCE_LIBRARIES } from "@/interfaces/constants";
 
 const isDialogOpen = defineModel<boolean>({ required: true });
 const dialogRef = useTemplateRef<Dialog>("dialog");

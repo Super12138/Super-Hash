@@ -1,8 +1,8 @@
+import CryptoJS from "crypto-js";
+
 import { Algorithms } from "@/interfaces/Algorithms";
 import type { MainPostData, WorkerPostData } from "@/interfaces/WorkerMessage";
 import { WorkerResult } from "@/interfaces/WorkerResults";
-
-import CryptoJS from "crypto-js";
 
 function getHasher(algorithm: Algorithms) {
     switch (algorithm) {

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 // import { snackbar } from 'mdui';
 import "mdui/components/snackbar.js";
-
 import { useRegisterSW } from "virtual:pwa-register/vue";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";

@@ -19,7 +19,7 @@ export function useBlankOrEmptyCheck(text: MaybeRefOrGetter<string | null>): Ref
 }
 
 export function useNotBlankOrEmptyCheck(
-    text: MaybeRefOrGetter<string | null>,
+    text: MaybeRefOrGetter<string | null>
 ): Ref<boolean, boolean> {
     const state = ref<boolean>(false);
     watchEffect(() => {

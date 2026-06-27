@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { UPDATE_URL } from "@/interfaces/constants";
-import { DownloadStatus } from "@/interfaces/DownloadingStatus";
-import type { GitHubRelease } from "@/interfaces/GitHubRelease";
-import { useAutoUpdateStore } from "@/stores/settings/autoUpdate";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { check } from "@tauri-apps/plugin-updater";
 import { useFetch } from "@vueuse/core";
@@ -11,6 +7,12 @@ import { snackbar } from "mdui";
 import { lt } from "semver";
 import { onUnmounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
+
+import { UPDATE_URL } from "@/interfaces/constants";
+import { DownloadStatus } from "@/interfaces/DownloadingStatus";
+import type { GitHubRelease } from "@/interfaces/GitHubRelease";
+import { useAutoUpdateStore } from "@/stores/settings/autoUpdate";
+
 import RichDialog from "../shared/RichDialog.vue";
 import UpdateProgressDialog from "./UpdateProgressDialog.vue";
 
@@ -43,7 +45,7 @@ watch(
         if (enabled) execute();
         else if (isFetching.value) abort();
     },
-    { immediate: true },
+    { immediate: true }
 );
 
 watch(data, (responseData) => {

@@ -12,7 +12,7 @@ export const useCacheSizeStore = defineStore(
 
         return { size, setSize };
     },
-    { persist: true },
+    { persist: true }
 );
 
 if (import.meta.hot) {

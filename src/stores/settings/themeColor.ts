@@ -16,7 +16,7 @@ export const useThemeColorStore = defineStore(
 
         return { color, setColor, $reset };
     },
-    { persist: true },
+    { persist: true }
 );
 
 if (import.meta.hot) {

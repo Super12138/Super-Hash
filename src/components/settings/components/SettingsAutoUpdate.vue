@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import "mdui/components/list-item.js";
 import "mdui/components/switch.js";
-
 import "@mdui/icons/update--outlined.js";
 import { useI18n } from "vue-i18n";
 

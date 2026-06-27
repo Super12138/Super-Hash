@@ -2,18 +2,15 @@
 import "mdui/components/button-icon.js";
 import "mdui/components/list.js";
 import "mdui/components/navigation-drawer.js";
-
 import "@mdui/icons/close--outlined.js";
-
+import type { NavigationDrawer } from "mdui/components/navigation-drawer.js";
+import { useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
 
 import EmptyTip from "../shared/EmptyTip.vue";
 import FadeOutInTransition from "../shared/FadeOutInTransition.vue";
-import FileOutputItem from "./FileOutputItem.vue";
-
 import type { FileItem } from "./FileItem";
-import { useTemplateRef } from "vue";
-import type { NavigationDrawer } from "mdui/components/navigation-drawer.js";
+import FileOutputItem from "./FileOutputItem.vue";
 
 defineProps<{ fileList: FileItem[] }>();
 

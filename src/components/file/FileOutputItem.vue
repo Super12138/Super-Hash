@@ -3,23 +3,21 @@ import "mdui/components/card.js";
 import "mdui/components/circular-progress.js";
 import "mdui/components/list-item.js";
 import "mdui/components/tooltip.js";
+import { useClipboard, useWebNotification } from "@vueuse/core";
+import { snackbar } from "mdui";
+import { computed, ref, Teleport, watch } from "vue";
+import { useI18n } from "vue-i18n";
 
 import { Algorithms } from "@/interfaces/Algorithms";
 import { NOTIFICATION_TAG } from "@/interfaces/constants";
 import { FileStatus } from "@/interfaces/FileStatus";
 import { Modes } from "@/interfaces/Modes";
-import { useFormatTime } from "@/utils/text";
-import type { FileItem } from "./FileItem";
-
-import { snackbar } from "mdui";
-
 import { useAutoCopyStore } from "@/stores/settings/autoCopy";
 import { useSystemNotificationStore } from "@/stores/settings/systemNotification";
-import { useClipboard, useWebNotification } from "@vueuse/core";
-import { computed, ref, Teleport, watch } from "vue";
-import { useI18n } from "vue-i18n";
+import { useFormatTime } from "@/utils/text";
 
 import FileDialog from "./FileDialog.vue";
+import type { FileItem } from "./FileItem";
 
 const props = defineProps<{ fileItem: FileItem }>();
 
@@ -137,7 +135,7 @@ watch(
                 });
             }
         }
-    },
+    }
 );
 </script>
 

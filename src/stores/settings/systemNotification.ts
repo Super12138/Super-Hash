@@ -12,7 +12,7 @@ export const useSystemNotificationStore = defineStore(
 
         return { enable, setState };
     },
-    { persist: true },
+    { persist: true }
 );
 
 if (import.meta.hot) {

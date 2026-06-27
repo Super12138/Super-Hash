@@ -4,7 +4,6 @@ import { createApp } from "vue";
 import { createI18n } from "vue-i18n";
 
 import App from "./App.vue";
-
 import enUS from "./locales/en-US.json";
 import zhCN from "./locales/zh-CN.json";
 
@@ -14,7 +13,7 @@ const pinia = createPinia();
 pinia.use(
     createPersistedState({
         storage: localStorage,
-    }),
+    })
 );
 
 const i18n = createI18n({

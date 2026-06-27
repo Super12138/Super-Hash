@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import "mdui/components/list-item.js";
-
 import "@mdui/icons/language--outlined.js";
-
-import { useI18n } from "vue-i18n";
 import { ref, Teleport } from "vue";
+import { useI18n } from "vue-i18n";
+
 import SettingsLanguageDialog from "./SettingsLanguageDialog.vue";
 
 const { t } = useI18n();

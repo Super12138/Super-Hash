@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import "mdui/components/dialog.js";
 import type { Dialog } from "mdui/components/dialog.js";
+import { onMounted, useTemplateRef } from "vue";
+import { useI18n } from "vue-i18n";
 
 import { APP_LANGUAGES } from "@/interfaces/constants";
 import { useLanguageStore } from "@/stores/settings/language";
 
 import SettingsLanguageItem from "./SettingsLanguageItem.vue";
-
-import { onMounted, useTemplateRef } from "vue";
-
-import { useI18n } from "vue-i18n";
 
 const { t, locale } = useI18n();
 const isOpen = defineModel<boolean>({ required: true });

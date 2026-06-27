@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import "mdui/components/button.js";
-
 import { useI18n } from "vue-i18n";
 
 defineEmits<{

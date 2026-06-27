@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import "mdui/components/list-item.js";
 import "mdui/components/switch.js";
-
 import "@mdui/icons/notifications-active--outlined.js";
-
-import { NOTIFICATION_TAG } from "@/interfaces/constants";
 import { useWebNotification } from "@vueuse/core";
 import { snackbar } from "mdui";
 import { watch } from "vue";
 import { useI18n } from "vue-i18n";
+
+import { NOTIFICATION_TAG } from "@/interfaces/constants";
 
 const props = defineProps<{
     checked: boolean;
@@ -56,7 +55,7 @@ watch(
     () => props.checked,
     (enabled) => {
         if (enabled) sendTestNotification();
-    },
+    }
 );
 </script>
 

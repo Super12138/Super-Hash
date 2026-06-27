@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import "mdui/components/list-item.js";
 import "mdui/components/switch.js";
-
 import "@mdui/icons/tips-and-updates--outlined.js";
-
 import { useI18n } from "vue-i18n";
 
 defineProps<{

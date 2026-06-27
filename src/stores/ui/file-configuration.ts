@@ -1,7 +1,8 @@
-import { useNotBlankOrEmptyCheck } from "@/utils/text";
-import { useFileNotBlankCheck } from "@/utils/file";
 import { acceptHMRUpdate, defineStore } from "pinia";
 import { ref } from "vue";
+
+import { useFileNotBlankCheck } from "@/utils/file";
+import { useNotBlankOrEmptyCheck } from "@/utils/text";
 
 export const useFileConfigurationStore = defineStore("fileConfiguration", () => {
     // file

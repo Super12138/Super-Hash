@@ -16,7 +16,7 @@ export const useLanguageStore = defineStore(
 
         return { language, setLanguage, $reset };
     },
-    { persist: true },
+    { persist: true }
 );
 
 if (import.meta.hot) {

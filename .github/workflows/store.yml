@@ -6,11 +6,11 @@ on:
       offline:
         description: "在安装包里合入 WebView2 离线安装器"
         required: false
-        default: 'false'
+        default: "false"
         type: choice
         options:
-          - 'true'
-          - 'false'
+          - "true"
+          - "false"
 
 env:
   NODE_OPTIONS: "--max-old-space-size=4096"

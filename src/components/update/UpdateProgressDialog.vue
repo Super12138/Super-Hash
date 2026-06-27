@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { DownloadStatus } from "@/interfaces/DownloadingStatus";
-import "mdui/components/linear-progress.js";
 import { computed, ref, watch } from "vue";
+import "mdui/components/linear-progress.js";
 import { useI18n } from "vue-i18n";
+
+import { DownloadStatus } from "@/interfaces/DownloadingStatus";
 
 const props = defineProps<{
     progress: number | undefined;
@@ -35,7 +36,7 @@ watch(
         if (value === DownloadStatus.Error) {
             canClose.value = true;
         }
-    },
+    }
 );
 </script>
 

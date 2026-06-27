@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import "mdui/components/list-item.js";
-
 import "@mdui/icons/cleaning-services--outlined.js";
-
-import { useI18n } from "vue-i18n";
 import { ref, Teleport } from "vue";
+import { useI18n } from "vue-i18n";
+
 import SimpleDialog from "@/components/shared/SimpleDialog.vue";
 
 const { t } = useI18n();

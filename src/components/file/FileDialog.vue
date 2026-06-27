@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import "mdui/components/dialog.js";
 import type { Dialog } from "mdui/components/dialog.js";
-
 import { computed, useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
 

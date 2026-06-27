@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import "mdui/components/button.js";
 import "mdui/components/dialog.js";
-
 import type { Dialog } from "mdui/components/dialog.js";
 import { useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
@@ -16,7 +15,7 @@ withDefaults(
     {
         closeOnOverlayClick: true,
         enableCancelButton: true,
-    },
+    }
 );
 
 const emit = defineEmits<{

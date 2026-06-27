@@ -1,7 +1,7 @@
 name: 问题反馈 / Bug Report
 description: 发现并反馈问题以帮助改进 Super Hash（Hash Checker）/ Create a report to help us improve Super Hash (Hash Checker)
 title: "[Bug] "
-labels: [ "bug" ]
+labels: ["bug"]
 body:
   - type: checkboxes
     id: checklist
@@ -61,7 +61,6 @@ body:
     validations:
       required: true
 
-
   - type: input
     id: system
     attributes:
@@ -96,7 +95,7 @@ body:
       render: shell
     validations:
       required: false
-      
+
   - type: textarea
     id: additional-context
     attributes:

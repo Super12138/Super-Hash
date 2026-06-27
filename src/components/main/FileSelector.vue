@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import "mdui/components/card.js";
-
 import "@mdui/icons/upload-file--outlined.js";
-
-import { useFileInfo } from "@/utils/file";
 import { useDropZone, useFileDialog } from "@vueuse/core";
+import { Teleport, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { Teleport, watch } from "vue";
+import { useFileInfo } from "@/utils/file";
 
 import FadeOutInTransition from "../shared/FadeOutInTransition.vue";
 import DragTip from "./DragTip.vue";

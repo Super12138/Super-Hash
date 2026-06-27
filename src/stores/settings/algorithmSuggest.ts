@@ -1,4 +1,3 @@
-import type { Switch } from "mdui";
 import { acceptHMRUpdate, defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -13,7 +12,7 @@ export const useAlgorithmSuggestStore = defineStore(
 
         return { enable, setState };
     },
-    { persist: true },
+    { persist: true }
 );
 
 if (import.meta.hot) {

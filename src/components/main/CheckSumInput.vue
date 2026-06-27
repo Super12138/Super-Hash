@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import "mdui/components/text-field.js";
+import { computed, ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
 
 import { useAlgorithmSuggestStore } from "@/stores/settings/algorithmSuggest";
 import { useFileConfigurationStore } from "@/stores/ui/file-configuration";
-
-import { computed, ref, watch } from "vue";
-
-import { useI18n } from "vue-i18n";
 
 const props = defineProps<{
     value: string;
@@ -59,7 +57,7 @@ const textFieldHelper = computed(() => {
 // TODO: 看看能不能用 $subscribe 替代
 watch(
     () => fileConfigurationStore.mode,
-    () => (isSuggestionSuccessful.value = false),
+    () => (isSuggestionSuccessful.value = false)
 );
 </script>
 

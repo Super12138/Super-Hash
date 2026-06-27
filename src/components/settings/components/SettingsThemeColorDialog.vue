@@ -2,11 +2,10 @@
 import "mdui/components/dialog.js";
 import { setColorScheme } from "mdui";
 import type { Dialog } from "mdui/components/dialog.js";
-
-import { useThemeColorStore } from "@/stores/settings/themeColor";
-
 import { ref, useTemplateRef, watch } from "vue";
 import { useI18n } from "vue-i18n";
+
+import { useThemeColorStore } from "@/stores/settings/themeColor";
 
 const { t } = useI18n();
 const isOpen = defineModel<boolean>({ required: true });

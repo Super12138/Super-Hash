@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import "mdui/components/list-item.js";
 import "mdui/components/text-field.js";
-
 import "@mdui/icons/storage--outlined.js";
-
-import { TextField } from "mdui/components/text-field.js";
-
-import { isBlankOrEmpty } from "@/utils/text";
 import { snackbar } from "mdui";
+import { TextField } from "mdui/components/text-field.js";
 import { useTemplateRef, watch } from "vue";
 import { useI18n } from "vue-i18n";
+
+import { isBlankOrEmpty } from "@/utils/text";
 
 const model = defineModel<number>({ required: true });
 const textField = useTemplateRef<TextField>("cache-text-field");
@@ -31,7 +29,7 @@ watch(
             }
             snackbar({ message });
         }
-    },
+    }
 );
 </script>
 

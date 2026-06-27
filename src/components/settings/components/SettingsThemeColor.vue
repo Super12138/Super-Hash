@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import "mdui/components/list-item.js";
-
 import "@mdui/icons/color-lens--outlined.js";
-
 import { ref, Teleport } from "vue";
 import { useI18n } from "vue-i18n";
+
 import SettingsThemeColorDialog from "./SettingsThemeColorDialog.vue";
 
 const { t } = useI18n();

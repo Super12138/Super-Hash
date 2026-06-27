@@ -1,7 +1,7 @@
 name: 功能请求 / Feature request
 description: 为 Super Hash（Hash Checker）提出一个新功能 / Suggest an idea for Super Hash (Hash Checker)
 title: "[Feature] "
-labels: [ "enhancement" ]
+labels: ["enhancement"]
 body:
   - type: textarea
     id: solution_description
