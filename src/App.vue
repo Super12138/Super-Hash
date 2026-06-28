@@ -35,6 +35,7 @@ import UpdateDialog from "./components/update/UpdateDialog.vue";
 import { toAlgorithm } from "./interfaces/Algorithms";
 import { FileStatus } from "./interfaces/FileStatus";
 import { toMode } from "./interfaces/Modes";
+import { Platform } from "./interfaces/Platform.ts";
 import type { MainPostData, ProgressInfo, WorkerPostData } from "./interfaces/WorkerMessage";
 import { WorkerResult } from "./interfaces/WorkerResults";
 import { useCacheSizeStore } from "./stores/settings/cacheSize";
@@ -59,8 +60,8 @@ const cacheSizeStore = useCacheSizeStore();
 const openFileOutputDrawer = ref(false);
 const openSettingsDrawer = ref(false);
 
-const enablePWA = VARIANT === "web" || VARIANT === "dev";
-const enableUpdateDialog = VARIANT === "desktop" || VARIANT === "dev";
+const enablePWA = Platform.isWeb || Platform.isDev;
+const enableUpdateDialog = Platform.isDesktopDefault || Platform.isDev;
 
 const isCheckMode = computed(() => {
     return fileConfigurationStore.mode === "Check";

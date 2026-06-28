@@ -7,6 +7,7 @@ import type { NavigationDrawer } from "mdui/components/navigation-drawer.js";
 import { useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
 
+import { Platform } from "@/interfaces/Platform.ts";
 import { useAlgorithmSuggestStore } from "@/stores/settings/algorithmSuggest";
 import { useAutoCopyStore } from "@/stores/settings/autoCopy";
 import { useAutoUpdateStore } from "@/stores/settings/autoUpdate";
@@ -34,7 +35,7 @@ const isOpen = defineModel<boolean>({ required: true });
 
 const { t } = useI18n();
 const settingsDrawer = useTemplateRef<NavigationDrawer>("settings-drawer");
-const isStoreOrWeb = VARIANT === "web" || STORE;
+const enableAutoUpdate = Platform.isDesktopDefault || Platform.isDev;
 
 const onClosed = () => {
     isOpen.value = false;
@@ -96,7 +97,7 @@ const closeDrawer = () => {
                 "
             />
             <SettingsAutoUpdate
-                v-if="!isStoreOrWeb"
+                v-if="enableAutoUpdate"
                 :checked="autoUpdateStore.enable"
                 @change="
                     (value: boolean) => {

@@ -1,12 +1,12 @@
+import { exec } from "node:child_process";
+import { fileURLToPath, URL } from "node:url";
+import { promisify } from "node:util";
+
 import vue from "@vitejs/plugin-vue";
 import { defineConfig, UserConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 import vueDevTools from "vite-plugin-vue-devtools";
-
-import { exec } from "node:child_process";
-import { fileURLToPath, URL } from "node:url";
-import { promisify } from "node:util";
 
 import packageJson from "./package.json";
 
@@ -135,27 +135,29 @@ export default defineConfig(async ({ command, mode }) => {
                 },
             },
             define: {
+                VARIANT: JSON.stringify("web"),
                 VERSION_NAME: JSON.stringify(packageJson.version),
-                VARIANT: JSON.stringify("dev"),
-                STORE: JSON.stringify(false),
                 COMMIT_HASH: JSON.stringify(commitHash),
                 VERSION_CODE: JSON.stringify(versionCode),
                 BUILD_TIME: JSON.stringify(new Date().toISOString()),
             },
         };
     } else {
+        const defaultVariable = {
+            VERSION_NAME: JSON.stringify(packageJson.version),
+            COMMIT_HASH: JSON.stringify(commitHash),
+            VERSION_CODE: JSON.stringify(versionCode),
+            BUILD_TIME: JSON.stringify(new Date().toISOString()),
+        };
+
         switch (mode) {
             case "web":
                 return {
                     ...baseConfig,
                     base: "/Super-Hash/",
                     define: {
-                        VERSION_NAME: JSON.stringify(packageJson.version),
                         VARIANT: JSON.stringify("web"),
-                        STORE: JSON.stringify(false),
-                        COMMIT_HASH: JSON.stringify(commitHash),
-                        VERSION_CODE: JSON.stringify(versionCode),
-                        BUILD_TIME: JSON.stringify(new Date().toISOString()),
+                        defaultVariable,
                     },
                 };
             case "desktop":
@@ -163,12 +165,8 @@ export default defineConfig(async ({ command, mode }) => {
                     ...baseConfig,
                     base: "/",
                     define: {
-                        VERSION_NAME: JSON.stringify(packageJson.version),
-                        VARIANT: JSON.stringify("desktop"),
-                        STORE: JSON.stringify(false),
-                        COMMIT_HASH: JSON.stringify(commitHash),
-                        VERSION_CODE: JSON.stringify(versionCode),
-                        BUILD_TIME: JSON.stringify(new Date().toISOString()),
+                        VARIANT: JSON.stringify("desktop-default"),
+                        defaultVariable,
                     },
                 };
             case "store":
@@ -176,12 +174,8 @@ export default defineConfig(async ({ command, mode }) => {
                     ...baseConfig,
                     base: "/",
                     define: {
-                        VERSION_NAME: JSON.stringify(packageJson.version),
-                        VARIANT: JSON.stringify("desktop"),
-                        STORE: JSON.stringify(true),
-                        COMMIT_HASH: JSON.stringify(commitHash),
-                        VERSION_CODE: JSON.stringify(versionCode),
-                        BUILD_TIME: JSON.stringify(new Date().toISOString()),
+                        VARIANT: JSON.stringify("desktop-store"),
+                        defaultVariable,
                     },
                 };
             default:
@@ -189,12 +183,8 @@ export default defineConfig(async ({ command, mode }) => {
                     ...baseConfig,
                     base: "/",
                     define: {
-                        VERSION_NAME: JSON.stringify(packageJson.version),
-                        VARIANT: JSON.stringify("unknown"),
-                        STORE: JSON.stringify(false),
-                        COMMIT_HASH: JSON.stringify(commitHash),
-                        VERSION_CODE: JSON.stringify(versionCode),
-                        BUILD_TIME: JSON.stringify(new Date().toISOString()),
+                        VARIANT: JSON.stringify("web"),
+                        defaultVariable,
                     },
                 };
         }
