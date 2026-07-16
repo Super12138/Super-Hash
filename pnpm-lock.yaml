@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@mdui/icons':
         specifier: ^1.0.3
-        version: 1.0.3
+        version: 1.0.4
       '@tauri-apps/api':
         specifier: ^2.11.1
         version: 2.11.1
@@ -848,8 +848,11 @@ packages:
   '@material/material-color-utilities@0.3.0':
     resolution: {integrity: sha512-ztmtTd6xwnuh2/xu+Vb01btgV8SQWYCaK56CkRK8gEkWe5TuDyBcYJ0wgkMRn+2VcE9KUmhvkz+N9GHrqw/C0g==}
 
-  '@mdui/icons@1.0.3':
-    resolution: {integrity: sha512-Jq9juUqIJMBvIRSTr0qBKiqnlbY5pVUzUP20EHSN8dT7GcqN7bq0AL8MASL5DxKs09kgcERq+z5bHJOkz/VDlA==}
+  '@mdui/icons-shared@1.0.1':
+    resolution: {integrity: sha512-AYil8MVSVaubWvt5Ms+0EyCV+4FvpT3jDRexVoO0VaSca0T4p62UVM81/ZHpwKOpZsnWU/HI8mZsRTYVmkxqnQ==}
+
+  '@mdui/icons@1.0.4':
+    resolution: {integrity: sha512-COhD5dwq4FQfMdh/3pSORvvlpL09cjVPcmBpJYwKqsJJZsTdiowsxeTI00n1GSUu2NJyIzphQ64JEoVVwWjKTQ==}
 
   '@mdui/jq@3.0.3':
     resolution: {integrity: sha512-nI8QK9UPHhiIbECrC1aMdLXNxP6WgUtC9XwRPs/e56FtwduePyxPyloXmgU8VYw85i6TtYdgClHS9tW8JweNZA==}
@@ -4119,9 +4122,14 @@ snapshots:
 
   '@material/material-color-utilities@0.3.0': {}
 
-  '@mdui/icons@1.0.3':
+  '@mdui/icons-shared@1.0.1':
     dependencies:
-      '@mdui/shared': 1.0.8
+      lit: 3.3.3
+      tslib: 2.8.1
+
+  '@mdui/icons@1.0.4':
+    dependencies:
+      '@mdui/icons-shared': 1.0.1
       lit: 3.3.3
       tslib: 2.8.1
 
@@ -4374,7 +4382,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.9
       estree-walker: 2.0.2
-      picomatch: 4.0.4
+      picomatch: 4.0.5
     optionalDependencies:
       rollup: 4.62.2
 
