@@ -34,7 +34,7 @@ importers:
         version: 14.2.0
       mdui:
         specifier: ^2.1.4
-        version: 2.1.4
+        version: 2.1.5
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
@@ -677,8 +677,8 @@ packages:
   '@emnapi/wasi-threads@1.2.2':
     resolution: {integrity: sha512-c95qOXkHdydNKhscBTebqEC1CVAZpyqOfVfBzQ1qgzyl3gfeldUjIggDbIZgDKsHLgnsM+igH7TJ/eAasaVuMA==}
 
-  '@floating-ui/utils@0.2.11':
-    resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+  '@floating-ui/utils@0.2.12':
+    resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -857,8 +857,8 @@ packages:
   '@mdui/jq@3.0.3':
     resolution: {integrity: sha512-nI8QK9UPHhiIbECrC1aMdLXNxP6WgUtC9XwRPs/e56FtwduePyxPyloXmgU8VYw85i6TtYdgClHS9tW8JweNZA==}
 
-  '@mdui/shared@1.0.8':
-    resolution: {integrity: sha512-YY863fjHBuk8KtiO4uLDm1YyIVdGrWv4xUxfv8jP32WqIQBkSTbV7HN8jnKXXIej0NFP7pU89yGr4GJYzVszPg==}
+  '@mdui/shared@1.0.9':
+    resolution: {integrity: sha512-deB/IaekNZtoI4sSWAvZOTHt5NNgvbKFrGRwSZtFvSP/Ec1+DkHKuFNTAefEvMX4VpUC6C6Xr0uexPI3Dn4AgA==}
 
   '@napi-rs/wasm-runtime@1.1.6':
     resolution: {integrity: sha512-ZLv/JdUfkvOy9eCnnBaGfiO+XimbjebAeO+MRQqD/B+FR1tnRN0tpKSJHRbE8sFfS6aqsXZ67TQjfwfsxULVbg==}
@@ -2489,8 +2489,8 @@ packages:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
 
-  mdui@2.1.4:
-    resolution: {integrity: sha512-QtK5xia5HXtVO7yH30QjwvvNruw5JdrJL1MEc1k6S/ZfsbHOj6BxxdYjrdv2HiN5ikkGqt5CIbZdFyq6shaZyw==}
+  mdui@2.1.5:
+    resolution: {integrity: sha512-uvXy/IFu/K93lAswsbKNj2Dn7Aab0LjWgdnfyIM/RQL0BhDe6Y9ChbN0x/Ts1W03nJtcef3wb1Fp44q8L9zmiQ==}
 
   mdurl@2.0.0:
     resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
@@ -3989,7 +3989,7 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@floating-ui/utils@0.2.11': {}
+  '@floating-ui/utils@0.2.12': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
@@ -4138,7 +4138,7 @@ snapshots:
       ssr-window: 5.0.1
       tslib: 2.8.1
 
-  '@mdui/shared@1.0.8':
+  '@mdui/shared@1.0.9':
     dependencies:
       '@lit/reactive-element': 2.1.2
       '@mdui/jq': 3.0.3
@@ -5578,14 +5578,15 @@ snapshots:
 
   math-intrinsics@1.1.0: {}
 
-  mdui@2.1.4:
+  mdui@2.1.5:
     dependencies:
-      '@floating-ui/utils': 0.2.11
+      '@floating-ui/utils': 0.2.12
       '@lit/localize': 0.12.2
       '@lit/reactive-element': 2.1.2
       '@material/material-color-utilities': 0.3.0
+      '@mdui/icons-shared': 1.0.1
       '@mdui/jq': 3.0.3
-      '@mdui/shared': 1.0.8
+      '@mdui/shared': 1.0.9
       classcat: 5.0.5
       is-promise: 4.0.0
       lit: 3.3.3
