@@ -157,7 +157,7 @@ export default defineConfig(async ({ command, mode }) => {
                     base: "/Super-Hash/",
                     define: {
                         VARIANT: JSON.stringify("web"),
-                        defaultVariable,
+                        ...defaultVariable,
                     },
                 };
             case "desktop":
@@ -166,7 +166,7 @@ export default defineConfig(async ({ command, mode }) => {
                     base: "/",
                     define: {
                         VARIANT: JSON.stringify("desktop-default"),
-                        defaultVariable,
+                        ...defaultVariable,
                     },
                 };
             case "store":
@@ -175,7 +175,7 @@ export default defineConfig(async ({ command, mode }) => {
                     base: "/",
                     define: {
                         VARIANT: JSON.stringify("desktop-store"),
-                        defaultVariable,
+                        ...defaultVariable,
                     },
                 };
             default:
@@ -184,7 +184,7 @@ export default defineConfig(async ({ command, mode }) => {
                     base: "/",
                     define: {
                         VARIANT: JSON.stringify("web"),
-                        defaultVariable,
+                        ...defaultVariable,
                     },
                 };
         }
