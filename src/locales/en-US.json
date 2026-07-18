@@ -15,7 +15,6 @@
         "label": "Algorithm",
         "placeholder": "Choose a algorithm"
     },
-    "checkSum-input": {},
     "file-list": {
         "label": "File List",
         "empty-tip": "No files currently",
@@ -155,7 +154,7 @@
     },
     "notification": {
         "not-supported": "Browser notifications arenot supported or denied the permission",
-        "hash-generated": "Calculation finished. ${algorithm}: ${hash}",
+        "hash-generated": "Calculation finished. {algorithm}: {hash}",
         "test-title": "This is a test notification"
     },
     "status": {
@@ -178,5 +177,10 @@
         "no-checksum": "Please enter a checksum",
         "no-file": "Please choose a file",
         "no-mode": "Please select a mode"
+    },
+    "time": {
+        "seconds": "{seconds} sec",
+        "minutes-seconds": "{minutes} min {seconds} sec",
+        "hours-minutes-seconds": "{hours} hr {minutes} min {seconds} sec"
     }
 }

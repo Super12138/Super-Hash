@@ -15,7 +15,6 @@
         "label": "算法",
         "placeholder": "请选择算法"
     },
-    "checkSum-input": {},
     "file-list": {
         "label": "文件列表",
         "empty-tip": "当前暂无文件",
@@ -164,7 +163,7 @@
     },
     "notification": {
         "not-supported": "您的浏览器不支持通知或未授权通知权限",
-        "hash-generated": "计算完成，${algorithm} 值为 ${hash}",
+        "hash-generated": "计算完成，{algorithm} 值为 {hash}",
         "test-title": "这是一条测试通知"
     },
     "checksum-input": {
@@ -178,5 +177,10 @@
         "no-algorithm": "请选择一个算法",
         "no-mode": "请选择一个模式",
         "no-checksum": "请输入校验值"
+    },
+    "time": {
+        "seconds": "{seconds} 秒",
+        "minutes-seconds": "{minutes} 分钟 {seconds} 秒",
+        "hours-minutes-seconds": "{hours} 小时 {minutes} 分钟 {seconds} 秒"
     }
 }

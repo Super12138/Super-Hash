@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { useClipboard, useWebNotification } from "@vueuse/core";
+import { snackbar } from "mdui";
 import "mdui/components/card.js";
 import "mdui/components/circular-progress.js";
 import "mdui/components/list-item.js";
 import "mdui/components/tooltip.js";
-import { useClipboard, useWebNotification } from "@vueuse/core";
-import { snackbar } from "mdui";
 import { computed, ref, Teleport, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
@@ -14,7 +14,7 @@ import { FileStatus } from "@/interfaces/FileStatus";
 import { Modes } from "@/interfaces/Modes";
 import { useAutoCopyStore } from "@/stores/settings/autoCopy";
 import { useSystemNotificationStore } from "@/stores/settings/systemNotification";
-import { useFormatTime } from "@/utils/text";
+import { formatTime } from "@/utils/text.ts";
 
 import FileDialog from "./FileDialog.vue";
 import type { FileItem } from "./FileItem";
@@ -50,7 +50,7 @@ const copyHash = () => {
     }
     if (props.fileItem.hash !== undefined) {
         copy(props.fileItem.hash);
-        if (copied) {
+        if (copied.value) {
             snackbar({ message: t("clipboard.copy-successful") });
         } else {
             snackbar({ message: t("clipboard.copy-failed") });
@@ -58,13 +58,25 @@ const copyHash = () => {
     }
 };
 
+const estimatedTime = computed(() => {
+    const { hours, minutes, seconds } = formatTime(props.fileItem.estimetedTime);
+
+    if (hours > 0) {
+        return t("time.hours-minutes-seconds", { hours, minutes, seconds });
+    } else if (minutes > 0) {
+        return t("time.minutes-seconds", { minutes, seconds });
+    } else {
+        return t("time.seconds", { seconds });
+    }
+});
+
 const statusText = computed(() => {
     switch (props.fileItem.status) {
         case FileStatus.Waiting:
             return t("status.waiting");
 
         case FileStatus.Computing:
-            return `${t("status.computing-estimated")}${useFormatTime(props.fileItem.estimetedTime).value}`;
+            return `${t("status.computing-estimated")}${estimatedTime.value}`;
 
         case FileStatus.Finished:
             return t("status.finish");
@@ -91,24 +103,9 @@ const modeText = computed(() => {
     }
 });
 
-const algorithmText = computed(() => {
-    switch (props.fileItem.algorithm) {
-        case Algorithms.MD5:
-            return "MD5";
-        case Algorithms.SHA1:
-            return "SHA1";
-        case Algorithms.SHA3:
-            return "SHA3";
-        case Algorithms.SHA256:
-            return "SHA256";
-        case Algorithms.SHA384:
-            return "SHA384";
-        case Algorithms.SHA512:
-            return "SHA512";
-        case Algorithms.Unselected:
-            return t("unselected");
-    }
-});
+const algorithmText = computed(() =>
+    props.fileItem.algorithm === Algorithms.Unselected ? t("unselected") : props.fileItem.algorithm
+);
 
 watch(
     () => props.fileItem.hash,

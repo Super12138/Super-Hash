@@ -54,12 +54,12 @@ const checksumStatusClass = computed(() => {
     >
         <div>
             <table class="mdui-table">
-                <thead>
+                <!-- <thead>
                     <tr>
                         <th scope="col">属性</th>
                         <th scope="col">值</th>
                     </tr>
-                </thead>
+                </thead> -->
                 <tbody>
                     <tr>
                         <th colspan="2" scope="colgroup">
@@ -179,7 +179,7 @@ tbody th {
     border: 0.0625rem solid rgb(var(--mdui-color-surface-variant));
 }
 
-thead tr th {
+tbody tr th[colspan="2"] {
     background-color: rgb(var(--mdui-color-secondary-container));
 }
 </style>
