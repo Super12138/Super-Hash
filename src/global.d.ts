@@ -14,17 +14,9 @@ declare const COMMIT_HASH: string;
 declare const VERSION_CODE: string;
 
 /**
- * 应用运行环境
- * * dev - 开发
- * * web - 在线
- * * desktop - 桌面端
+ * 应用分发版本变种
  */
 declare const VARIANT: string;
-
-/**
- * 商店版
- */
-declare const STORE: boolean;
 
 /**
  * 构建时间（ISO 格式的 UTC 时间）

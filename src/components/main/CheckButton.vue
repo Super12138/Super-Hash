@@ -2,9 +2,7 @@
 import "mdui/components/button.js";
 import { useI18n } from "vue-i18n";
 
-defineEmits<{
-    (e: "click"): void;
-}>();
+defineEmits<{ (e: "click"): void }>();
 
 const { t } = useI18n();
 </script>

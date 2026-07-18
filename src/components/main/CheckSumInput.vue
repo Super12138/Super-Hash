@@ -3,17 +3,13 @@ import "mdui/components/text-field.js";
 import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
+import { Algorithms } from "@/interfaces/Algorithms";
 import { useAlgorithmSuggestStore } from "@/stores/settings/algorithmSuggest";
 import { useFileConfigurationStore } from "@/stores/ui/file-configuration";
 
-const props = defineProps<{
-    value: string;
-    enabled: boolean;
-}>();
+const props = defineProps<{ value: string; enabled: boolean }>();
 
-defineEmits<{
-    (e: "input", value: string): void;
-}>();
+defineEmits<{ (e: "input", value: string): void }>();
 
 const { t } = useI18n();
 
@@ -26,19 +22,19 @@ const detectAndWritrAlgorithm = () => {
     if (algorithmSuggestStore.enable) {
         switch (props.value.trim().length) {
             case 32:
-                fileConfigurationStore.setAlgorithm("MD5");
+                fileConfigurationStore.setAlgorithm(Algorithms.MD5);
                 isSuggestionSuccessful.value = true;
                 break;
             case 40:
-                fileConfigurationStore.setAlgorithm("SHA1");
+                fileConfigurationStore.setAlgorithm(Algorithms.SHA1);
                 isSuggestionSuccessful.value = true;
                 break;
             case 64:
-                fileConfigurationStore.setAlgorithm("SHA256");
+                fileConfigurationStore.setAlgorithm(Algorithms.SHA256);
                 isSuggestionSuccessful.value = true;
                 break;
             case 96:
-                fileConfigurationStore.setAlgorithm("SHA384");
+                fileConfigurationStore.setAlgorithm(Algorithms.SHA384);
                 isSuggestionSuccessful.value = true;
                 break;
             default:
@@ -48,11 +44,9 @@ const detectAndWritrAlgorithm = () => {
     }
 };
 
-const textFieldHelper = computed(() => {
-    return isSuggestionSuccessful.value
-        ? t("checksum-input.match-algorithm")
-        : t("checksum-input.helper");
-});
+const textFieldHelper = computed(() =>
+    isSuggestionSuccessful.value ? t("checksum-input.match-algorithm") : t("checksum-input.helper")
+);
 
 // TODO: 看看能不能用 $subscribe 替代
 watch(

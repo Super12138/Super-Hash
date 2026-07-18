@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import "mdui/components/dialog.js";
-import "mdui/components/divider.js";
 import { useClipboard } from "@vueuse/core";
 import { snackbar } from "mdui";
+import "mdui/components/dialog.js";
 import type { Dialog } from "mdui/components/dialog.js";
-import { computed } from "vue";
-import { useTemplateRef } from "vue";
+import "mdui/components/divider.js";
+import { computed, useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { OPEN_SOURCE_LIBRARIES } from "@/interfaces/constants";
+import { Platform } from "@/interfaces/Platform";
 
 const isDialogOpen = defineModel<boolean>({ required: true });
 const dialogRef = useTemplateRef<Dialog>("dialog");
@@ -27,7 +27,7 @@ const onConfirm = () => {
 };
 
 const version = computed(() => {
-    return `${VERSION_NAME}-${VARIANT}-${COMMIT_HASH} (${VERSION_CODE})${STORE ? " [store]" : ""}`;
+    return `${VERSION_NAME}-${VARIANT}-${COMMIT_HASH} (${VERSION_CODE})${Platform.isDesktopStore ? " [store]" : ""}`;
 });
 
 const buildTime = BUILD_TIME;

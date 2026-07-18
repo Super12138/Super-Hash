@@ -104,11 +104,11 @@
     "confirm": "Confirm",
     "file-dialog": {
         "basic-info": {
-            "add-time": "Add time: ",
-            "algorithm": "Algorithm: ",
-            "file-name": "File name: ",
-            "mode": "Mode: ",
-            "status": "Status: ",
+            "add-time": "Add time",
+            "algorithm": "Algorithm",
+            "file-name": "File name",
+            "mode": "Mode",
+            "status": "Status",
             "title": "Basic Info"
         },
         "headline": "Details",
@@ -116,9 +116,9 @@
             "headline": "Checksum Info",
             "success": "Success",
             "failed": "Failed",
-            "verification-result": "Verification Result: ",
-            "checksum-generate": "Checksum (Generate): ",
-            "checksum-user": "Checksum (User provided): "
+            "verification-result": "Verification Result",
+            "checksum-generate": "Checksum (Generate)",
+            "checksum-user": "Checksum (User provided)"
         }
     },
     "pwa": {

@@ -1,18 +1,12 @@
 export enum Modes {
-    Unselected,
-    Check,
-    Generate,
+    Unselected = "Unselected",
+    Check = "Check",
+    Generate = "Generate",
 }
 
 export function toMode(mode: string): Modes {
-    switch (mode) {
-        case "Check":
-            return Modes.Check;
-
-        case "Generate":
-            return Modes.Generate;
-
-        default:
-            return Modes.Unselected;
+    if (Object.values(Modes).includes(mode as Modes)) {
+        return mode as Modes;
     }
+    return Modes.Unselected;
 }

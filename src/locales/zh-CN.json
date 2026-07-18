@@ -112,19 +112,19 @@
         "headline": "详细信息",
         "basic-info": {
             "title": "基本信息",
-            "file-name": "文件名：",
-            "mode": "计算模式：",
-            "algorithm": "计算算法：",
-            "status": "计算状态：",
-            "add-time": "添加时间："
+            "file-name": "文件名",
+            "mode": "计算模式",
+            "algorithm": "计算算法",
+            "status": "计算状态",
+            "add-time": "添加时间"
         },
         "checksum-info": {
             "headline": "校验信息",
-            "checksum-user": "校验值（用户提供）：",
-            "checksum-generate": "校验值（生成）：",
+            "checksum-user": "校验值（用户提供）",
+            "checksum-generate": "校验值（生成）",
             "success": "校验成功",
             "failed": "校验失败",
-            "verification-result": "校验结果："
+            "verification-result": "校验结果"
         }
     },
     "click-to-copy": "单击即可复制",

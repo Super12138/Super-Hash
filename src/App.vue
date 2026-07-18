@@ -13,14 +13,13 @@
         生命周期钩子
 */
 
-import "mdui/components/layout-main.js";
-import "mdui/components/layout.js";
 import { useWebWorker } from "@vueuse/core";
 import { setColorScheme } from "mdui";
-import { computed, onMounted, onUnmounted, ref, watch, type Ref } from "vue";
+import "mdui/components/layout-main.js";
+import "mdui/components/layout.js";
+import { computed, onMounted, onUnmounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { FileItem } from "./components/file/FileItem";
 import FileOutputDrawer from "./components/file/FileOutputDrawer.vue";
 import AlgorithmDropdown from "./components/main/AlgorithmSelect.vue";
 import CheckButton from "./components/main/CheckButton.vue";
@@ -32,9 +31,9 @@ import SettingsDrawer from "./components/settings/SettingsDrawer.vue";
 import PWABadage from "./components/shared/PWABadage.vue";
 import SimpleDialog from "./components/shared/SimpleDialog.vue";
 import UpdateDialog from "./components/update/UpdateDialog.vue";
-import { toAlgorithm } from "./interfaces/Algorithms";
-import { FileStatus } from "./interfaces/FileStatus";
-import { toMode } from "./interfaces/Modes";
+import { useFileList } from "./composables/useFileList.ts";
+import { Algorithms } from "./interfaces/Algorithms";
+import { Modes, toMode } from "./interfaces/Modes";
 import { Platform } from "./interfaces/Platform.ts";
 import type { MainPostData, ProgressInfo, WorkerPostData } from "./interfaces/WorkerMessage";
 import { WorkerResult } from "./interfaces/WorkerResults";
@@ -42,20 +41,27 @@ import { useCacheSizeStore } from "./stores/settings/cacheSize";
 import { useThemeColorStore } from "./stores/settings/themeColor";
 import { useFileConfigurationStore } from "./stores/ui/file-configuration";
 
-let fileList: Ref<FileItem[]> = ref<FileItem[]>([]);
+const {
+    fileList,
+    addFile,
+    getCurrentFile,
+    setCurrentFileStartCompute,
+    updateProgress,
+    finishCompute,
+} = useFileList();
 const openTipDialog = ref(false);
-const tipDesc = ref("");
+const tipString = ref("");
 
 const { t } = useI18n();
 
 // Web Worker
 const fileWorker = new Worker(new URL("worker/FileWorker.ts", import.meta.url), { type: "module" });
-const { data: workerData, post, terminate, worker } = useWebWorker(fileWorker);
+const { data: workerData, post, terminate } = useWebWorker(fileWorker);
 
 // 各种 Store
-const fileConfigurationStore = useFileConfigurationStore();
-const themeColorStore = useThemeColorStore();
-const cacheSizeStore = useCacheSizeStore();
+const fileConfig = useFileConfigurationStore();
+const themeColor = useThemeColorStore();
+const cacheSize = useCacheSizeStore();
 
 const openFileOutputDrawer = ref(false);
 const openSettingsDrawer = ref(false);
@@ -63,9 +69,7 @@ const openSettingsDrawer = ref(false);
 const enablePWA = Platform.isWeb || Platform.isDev;
 const enableUpdateDialog = Platform.isDesktopDefault || Platform.isDev;
 
-const isCheckMode = computed(() => {
-    return fileConfigurationStore.mode === "Check";
-});
+const isCheckMode = computed(() => fileConfig.mode === Modes.Check);
 
 const toggleFileDrawer = () => {
     openFileOutputDrawer.value = !openFileOutputDrawer.value;
@@ -89,77 +93,60 @@ const openOnlyFileDrawer = () => {
 };
 
 const processFile = (file: File) => {
-    const currentFile = new FileItem(Date.now(), file.name);
-    if (
-        fileList.value.length > 0 &&
-        fileList.value[fileList.value.length - 1].status === FileStatus.Waiting
-    ) {
-        fileList.value[fileList.value.length - 1] = currentFile;
-    } else {
-        fileList.value.push(currentFile);
-    }
-    fileConfigurationStore.setFile(file);
+    addFile(file);
+    fileConfig.setFile(file);
 };
 
-const checkConfigurationIsVaild = () => {
-    if (!fileConfigurationStore.hasFile) {
-        tipDesc.value = t("errors.no-file");
+const calculateHash = () => {
+    if (!fileConfig.hasFile) {
+        tipString.value = t("errors.no-file");
         openTipDialog.value = true;
         return;
     }
-    if (!fileConfigurationStore.isAlgorithmValid) {
-        tipDesc.value = t("errors.no-algorithm");
+    if (!fileConfig.isAlgorithmValid) {
+        tipString.value = t("errors.no-algorithm");
         openTipDialog.value = true;
         return;
     }
-    if (!fileConfigurationStore.isModeValid) {
-        tipDesc.value = t("errors.no-mode");
+    if (!fileConfig.isModeValid) {
+        tipString.value = t("errors.no-mode");
         openTipDialog.value = true;
         return;
     }
     if (isCheckMode.value) {
-        if (!fileConfigurationStore.isCheckSumValid) {
-            tipDesc.value = t("errors.no-checksum");
+        if (!fileConfig.isCheckSumValid) {
+            tipString.value = t("errors.no-checksum");
             openTipDialog.value = true;
             return;
         }
     }
 
-    if (!fileList.value[fileList.value.length - 1]) return;
-    fileList.value[fileList.value.length - 1].status = FileStatus.Computing;
-    fileList.value[fileList.value.length - 1].algorithm = toAlgorithm(
-        fileConfigurationStore.algorithm
-    );
-    fileList.value[fileList.value.length - 1].mode = toMode(fileConfigurationStore.mode);
-    fileList.value[fileList.value.length - 1].checkSum = fileConfigurationStore.checkSum;
+    if (!getCurrentFile()) return;
+    setCurrentFileStartCompute(fileConfig.algorithm, fileConfig.mode, fileConfig.checkSum);
 
     openOnlyFileDrawer();
 
     const msg: MainPostData = {
-        file: fileConfigurationStore.file!,
-        algorithm: toAlgorithm(fileConfigurationStore.algorithm),
-        chunkSize: cacheSizeStore.size,
+        file: fileConfig.file!,
+        algorithm: fileConfig.algorithm,
+        chunkSize: cacheSize.size,
     };
 
     post(msg);
 
-    fileList.value[fileList.value.length - 1].progress = undefined;
-    fileConfigurationStore.$reset();
+    fileConfig.$reset();
 };
 
 watch(workerData, (workerResult: WorkerPostData) => {
     //if (!workerResult) return;
     switch (workerResult.type) {
         case WorkerResult.Progress:
-            const progressData = workerResult.data as ProgressInfo;
-            fileList.value[fileList.value.length - 1].progress = progressData.progress;
-            fileList.value[fileList.value.length - 1].estimetedTime =
-                progressData.estimatedRemainingTime;
+            const data = workerResult.data as ProgressInfo;
+            updateProgress(data.progress, data.estimatedRemainingTime);
             break;
 
         case WorkerResult.Result:
-            fileList.value[fileList.value.length - 1].status = FileStatus.Finished;
-            fileList.value[fileList.value.length - 1].hash = workerResult.data.toString();
+            finishCompute(workerResult.data.toString());
             break;
 
         default:
@@ -167,7 +154,7 @@ watch(workerData, (workerResult: WorkerPostData) => {
     }
 });
 
-themeColorStore.$subscribe(
+themeColor.$subscribe(
     (mutation, state) => {
         setColorScheme(state.color);
     },
@@ -194,35 +181,35 @@ onUnmounted(() => {
 
         <mdui-layout-main class="container">
             <main>
-                <FileSelector :file="fileConfigurationStore.file" @changed="processFile" />
+                <FileSelector :file="fileConfig.file" @changed="processFile" />
                 <div class="options-container">
                     <AlgorithmDropdown
-                        :value="fileConfigurationStore.algorithm"
+                        :value="fileConfig.algorithm"
                         @change="
-                            (value: string) => {
-                                fileConfigurationStore.setAlgorithm(value);
+                            (value: Algorithms) => {
+                                fileConfig.setAlgorithm(value);
                             }
                         "
                     />
                     <ModeDropdown
-                        :value="fileConfigurationStore.mode"
+                        :value="fileConfig.mode"
                         @change="
-                            (value: string) => {
-                                fileConfigurationStore.setMode(value);
+                            (value: Modes) => {
+                                fileConfig.setMode(value);
                             }
                         "
                     />
                 </div>
                 <CheckSumInput
-                    :value="fileConfigurationStore.checkSum"
+                    :value="fileConfig.checkSum"
                     :enabled="isCheckMode"
                     @input="
                         (value: string) => {
-                            fileConfigurationStore.setCheckSum(value);
+                            fileConfig.setCheckSum(value);
                         }
                     "
                 />
-                <CheckButton @click="checkConfigurationIsVaild()" />
+                <CheckButton @click="calculateHash()" />
             </main>
         </mdui-layout-main>
     </mdui-layout>
@@ -236,7 +223,7 @@ onUnmounted(() => {
     <SimpleDialog
         v-model="openTipDialog"
         :headline="t('error')"
-        :description="tipDesc"
+        :description="tipString"
         :enable-cancel-button="false"
         :close-on-overlay-click="true"
     />

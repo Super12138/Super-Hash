@@ -1,6 +1,8 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
+import { Algorithms } from "@/interfaces/Algorithms";
+import { Modes } from "@/interfaces/Modes";
 import { useFileNotBlankCheck } from "@/utils/file";
 import { useNotBlankOrEmptyCheck } from "@/utils/text";
 
@@ -13,16 +15,16 @@ export const useFileConfigurationStore = defineStore("fileConfiguration", () => 
     }
 
     // mode
-    const mode = ref<string>("");
-    const isModeValid = useNotBlankOrEmptyCheck(mode);
-    function setMode(newMode: string) {
+    const mode = ref<Modes>(Modes.Unselected);
+    const isModeValid = computed(() => mode.value !== Modes.Unselected);
+    function setMode(newMode: Modes) {
         mode.value = newMode;
     }
 
     // algorithm
-    const algorithm = ref<string>("");
-    const isAlgorithmValid = useNotBlankOrEmptyCheck(algorithm);
-    function setAlgorithm(newAlgorithm: string) {
+    const algorithm = ref<Algorithms>(Algorithms.Unselected);
+    const isAlgorithmValid = computed(() => algorithm.value !== Algorithms.Unselected);
+    function setAlgorithm(newAlgorithm: Algorithms) {
         algorithm.value = newAlgorithm;
     }
 
@@ -35,8 +37,8 @@ export const useFileConfigurationStore = defineStore("fileConfiguration", () => 
 
     function $reset() {
         file.value = null;
-        mode.value = "";
-        algorithm.value = "";
+        mode.value = Modes.Unselected;
+        algorithm.value = Algorithms.Unselected;
         checkSum.value = "";
     }
 

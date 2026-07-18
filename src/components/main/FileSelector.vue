@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import "mdui/components/card.js";
 import "@mdui/icons/upload-file--outlined.js";
 import { useDropZone, useFileDialog } from "@vueuse/core";
-import { Teleport, watch } from "vue";
+import "mdui/components/card.js";
+import { Teleport } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useFileInfo } from "@/utils/file";
@@ -10,16 +10,10 @@ import { useFileInfo } from "@/utils/file";
 import FadeOutInTransition from "../shared/FadeOutInTransition.vue";
 import DragTip from "./DragTip.vue";
 
-const props = defineProps<{
-    file: File | null;
-}>();
-
-const emit = defineEmits<{
-    (e: "changed", file: File): void;
-}>();
+const props = defineProps<{ file: File | null }>();
+const emit = defineEmits<{ (e: "changed", file: File): void }>();
 
 const { t } = useI18n();
-
 const fileInfo = useFileInfo(() => props.file);
 
 // 拖拽文件
@@ -33,20 +27,17 @@ const { isOverDropZone } = useDropZone(() => document.body, {
 });
 
 // 文件选择器
-const { files, open, reset, onCancel, onChange } = useFileDialog({
-    multiple: false,
-});
-
-watch(files, (file) => {
-    if (file !== null) {
-        emit("changed", file[0]);
+const { open, reset, onChange } = useFileDialog({ multiple: false });
+onChange((files: FileList | null) => {
+    if (files !== null) {
+        emit("changed", files[0]);
         reset();
     }
 });
 </script>
 
 <template>
-    <mdui-card variant="outlined" clickable @click="open()">
+    <mdui-card variant="outlined" clickable @click="open">
         <mdui-icon-upload-file--outlined></mdui-icon-upload-file--outlined>
         <p>{{ t("choose-file.label") }}</p>
         <small>{{ t("choose-file.helper") }}</small>
