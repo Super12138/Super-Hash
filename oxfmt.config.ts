@@ -10,6 +10,6 @@ export default defineConfig({
     sortImports: {
         partitionByComment: true,
     },
-    ignorePatterns: [".tauri/", "index.html", "pnpm-lock.yaml"],
+    ignorePatterns: [".tauri/", "index.html", "pnpm-lock.yaml", "src/assets/gpl.svg"],
     trailingComma: "es5",
 });

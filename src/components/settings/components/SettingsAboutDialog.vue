@@ -56,7 +56,7 @@ const copyVersion = () => {
         ref="dialog"
         style="text-align: center"
     >
-        <img width="120px" src="/icon.png" />
+        <img width="120px" src="../../../assets/icon.webp" />
         <h2 style="margin-top: 10px; margin-bottom: 5px">Super Hash</h2>
 
         <p style="margin-top: 5px">

@@ -1,9 +1,11 @@
 import { exec } from "node:child_process";
+import { rm } from "node:fs/promises";
+import { resolve } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 import { promisify } from "node:util";
 
 import vue from "@vitejs/plugin-vue";
-import { defineConfig, UserConfig } from "vite";
+import { defineConfig, Plugin, ResolvedConfig, UserConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 import vueDevTools from "vite-plugin-vue-devtools";
@@ -97,6 +99,7 @@ export default defineConfig(async ({ command, mode }) => {
                     type: "module",
                 },
             }),
+            IgnoreFilesPlugin("icon.png"),
         ],
         resolve: {
             alias: {
@@ -193,3 +196,27 @@ export default defineConfig(async ({ command, mode }) => {
         }
     }
 });
+
+/**
+ * Edit from: https://github.com/guangzan/vite-plugin-ignore-public/blob/main/src/index.ts
+ * MIT License: https://github.com/guangzan/vite-plugin-ignore-public/blob/main/LICENSE
+ *
+ * @author guangzan
+ * @author Super12138
+ */
+function IgnoreFilesPlugin(...files: string[]): Plugin {
+    let config: ResolvedConfig;
+
+    return {
+        name: "vite-plugin-ignore-files",
+        configResolved(_config) {
+            config = _config;
+        },
+        // 不能使用buildEnd，因为buildEnd触发时还没有把构建产物写入到dist文件夹
+        closeBundle() {
+            for (const file of files) {
+                rm(resolve(`${config.build.outDir}/${file}`), { recursive: true });
+            }
+        },
+    };
+}
