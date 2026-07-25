@@ -16,6 +16,7 @@ const swActivated = ref(false);
  * This function will register a periodic sync check every hour, you can modify the interval as needed.
  */
 function registerPeriodicSync(swUrl: string, r: ServiceWorkerRegistration) {
+    console.log("registerPeriodicSync", swUrl, r);
     if (period <= 0) return;
 
     setInterval(async () => {
@@ -36,15 +37,21 @@ function registerPeriodicSync(swUrl: string, r: ServiceWorkerRegistration) {
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
     immediate: true,
     onRegisteredSW(swUrl, r) {
+        console.log("onRegisteredSW", swUrl, r);
         if (period <= 0) return;
         if (r?.active?.state === "activated") {
             swActivated.value = true;
+            console.log("Service worker activated", swUrl, r);
             registerPeriodicSync(swUrl, r);
         } else if (r?.installing) {
             r.installing.addEventListener("statechange", (e) => {
                 const sw = e.target as ServiceWorker;
+                console.log("statechange", sw.state);
                 swActivated.value = sw.state === "activated";
-                if (swActivated.value) registerPeriodicSync(swUrl, r);
+                if (swActivated.value) {
+                    console.log("Service worker activated", swUrl, r);
+                    registerPeriodicSync(swUrl, r);
+                }
             });
         }
     },
