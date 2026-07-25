@@ -154,7 +154,7 @@ export default defineConfig(async ({ command, mode }) => {
             case "web":
                 return {
                     ...baseConfig,
-                    base: "/Super-Hash/",
+                    base: "/", // TODO: 后续评估是否要整合配置到baseConfig
                     define: {
                         VARIANT: JSON.stringify("web"),
                         ...defaultVariable,
