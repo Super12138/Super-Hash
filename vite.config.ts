@@ -70,7 +70,7 @@ export default defineConfig(async ({ command, mode }) => {
                 manifest: {
                     name: "Super Hash",
                     short_name: "Super Hash",
-                    start_url: "/Super-Hash/",
+                    start_url: "/",
                     description: "一个快速、随时可用，且遵循 Material Design 3 的跨平台文件校验器",
                     lang: "zh",
                     theme_color: "#ffffff",
