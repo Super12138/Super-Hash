@@ -125,7 +125,8 @@
             "action": "Update Now",
             "tip": "Super Hash update available"
         },
-        "offline-ready": "Super Hash is ready for offline use"
+        "offline-ready": "Super Hash is ready for offline use",
+        "installing": "Caching Super Hash for offline use"
     },
     "update-dialog": {
         "headline": "New version {version} available",

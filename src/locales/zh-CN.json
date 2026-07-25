@@ -104,7 +104,8 @@
         "new-version": {
             "tip": "Super Hash 有新版本",
             "action": "立即更新"
-        }
+        },
+        "installing": "正在缓存 Super Hash 以便离线使用"
     },
     "confirm": "确定",
     "file-dialog": {

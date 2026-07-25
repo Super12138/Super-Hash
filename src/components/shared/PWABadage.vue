@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // import { snackbar } from 'mdui';
+import "mdui/components/circular-progress.js";
 import "mdui/components/snackbar.js";
 import { useRegisterSW } from "virtual:pwa-register/vue";
 import { ref } from "vue";
@@ -38,19 +39,21 @@ function registerPeriodicSync(swUrl: string, r: ServiceWorkerRegistration) {
 const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
     immediate: true,
     onRegisteredSW(swScriptUrl, registration) {
-        console.log("Start SW register: ", swScriptUrl, registration);
+        // console.log("Start SW register: ", swScriptUrl, registration);
         if (period <= 0) return;
         if (registration?.active?.state === "activated") {
             swActivated.value = true;
-            console.log("Service worker activated", swScriptUrl, registration);
+            // console.log("Service worker activated", swScriptUrl, registration);
             registerPeriodicSync(swScriptUrl, registration);
         } else if (registration?.installing) {
-            console.log("Service worker installing", swScriptUrl, registration);
+            // console.log("Service worker installing", swScriptUrl, registration);
+            swInstalling.value = true;
             registration.installing.addEventListener("statechange", (e) => {
                 const sw = e.target as ServiceWorker;
-                swActivated.value = sw.state === "activated";
-                if (swActivated.value) {
-                    console.log("Service worker activated", swScriptUrl, registration);
+                if (sw.state === "activated") {
+                    swActivated.value = true;
+                    swInstalling.value = false;
+                    // console.log("Service worker activated", swScriptUrl, registration);
                     registerPeriodicSync(swScriptUrl, registration);
                 }
             });
@@ -73,7 +76,9 @@ const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
 
 <template>
     <mdui-snackbar :open="offlineReady">{{ t("pwa.offline-ready") }}</mdui-snackbar>
-    <mdui-snackbar :open="swInstalling">正在对Super Hash进行缓存，此时你可以正常使用Super Hash。</mdui-snackbar>
+    <mdui-snackbar :open="swInstalling" auto-close-delay="0">
+        {{ t("pwa.installing") }}
+    </mdui-snackbar>
     <mdui-snackbar :open="needRefresh">
         {{ t("pwa.new-version.tip") }}
         <mdui-button slot="action" variant="text" @click="updateServiceWorker(true)">
