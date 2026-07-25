@@ -110,6 +110,9 @@ export default defineConfig(async ({ command, mode }) => {
                         if (id.includes("mdui")) {
                             return "mdui";
                         }
+                        if (id.includes("vue")) {
+                            return "vue";
+                        }
                     },
                 },
             },
