@@ -5,6 +5,8 @@ import {
 } from "@tauri-apps/plugin-notification";
 import { createEventHook, useSupported } from "@vueuse/core";
 
+import { isAndroidDevice } from "@/utils/system";
+
 export interface NotificationOptions {
     title?: string;
     body?: string;
@@ -56,24 +58,59 @@ export function useNotification() {
         }
     }
 
-    function sendOneNotification(options: NotificationOptions) {
+    async function sendOneNotification(options: NotificationOptions) {
         if (import.meta.env.TAURI_ENV_PLATFORM) {
             console.log("in Tauri env, send by tauri api");
 
             sendNotification({
-                title: options.title,
+                title: options.title || "",
                 body: options.body,
                 icon: options.icon,
             });
         } else {
             console.log("in browser env, send by web api");
-            new Notification(options.title, {
-                body: options.body,
-                lang: options.lang,
-                dir: options.dir,
-                tag: options.tag,
-                icon: options.icon,
-            }).onclick = clickTrigger;
+            if (isAndroidDevice()) {
+                console.log("android device, send by service worker");
+                // refine by deepseek
+                if ("serviceWorker" in navigator) {
+                    try {
+                        const registration =
+                            await navigator.serviceWorker.getRegistration("/sw.js");
+                        if (registration) {
+                            await registration.showNotification(options.title || "", {
+                                body: options.body,
+                                icon: options.icon,
+                                tag: options.tag,
+                                lang: options.lang,
+                                dir: options.dir,
+                            });
+                            return;
+                        }
+                    } catch (swError) {
+                        console.warn("Service Worker notification failed:", swError);
+                    }
+                }
+
+                try {
+                    new Notification(options.title || "", {
+                        body: options.body,
+                        lang: options.lang,
+                        dir: options.dir,
+                        tag: options.tag,
+                        icon: options.icon,
+                    }).onclick = clickTrigger;
+                } catch (nativeError) {
+                    console.error("Native notification also failed:", nativeError);
+                }
+            } else {
+                new Notification(options.title || "", {
+                    body: options.body,
+                    lang: options.lang,
+                    dir: options.dir,
+                    tag: options.tag,
+                    icon: options.icon,
+                }).onclick = clickTrigger;
+            }
         }
     }
 
