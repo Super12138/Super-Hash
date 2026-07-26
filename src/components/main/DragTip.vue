@@ -33,5 +33,6 @@ h1 {
     font-size: var(--mdui-typescale-display-small-size);
     letter-spacing: var(--mdui-typescale-display-small-tracking);
     font-weight: var(--mdui-typescale-display-small-weight);
+    color: rgb(230, 225, 229);
 }
 </style>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import "@mdui/icons/close--outlined.js";
 import "mdui/components/button-icon.js";
 import "mdui/components/list.js";
 import "mdui/components/navigation-drawer.js";
-import "@mdui/icons/close--outlined.js";
 import type { NavigationDrawer } from "mdui/components/navigation-drawer.js";
 import { useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
