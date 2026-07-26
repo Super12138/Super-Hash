@@ -92,6 +92,7 @@ export function useNotification() {
                 }
 
                 try {
+                    console.log("failed to send service worker notification, trying native notification");
                     new Notification(options.title || "", {
                         body: options.body,
                         lang: options.lang,
