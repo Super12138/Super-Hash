@@ -75,7 +75,7 @@ export default defineConfig(async ({ command, mode }) => {
                     start_url: "/",
                     description: "一个快速、随时可用，且遵循 Material Design 3 的跨平台文件校验器",
                     lang: "zh",
-                    theme_color: "#ffffff",
+                    theme_color: "#775086",
                     orientation: "any",
                     dir: "ltr",
                     categories: ["security"],
