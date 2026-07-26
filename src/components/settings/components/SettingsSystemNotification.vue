@@ -23,7 +23,8 @@ const { isSupported, isPermissionDenied, send } = useNotification();
 
 const sendTestNotification = () => {
     if (!isSupported.value) snackbar({ message: t("notification.not-supported") });
-    if (isPermissionDenied()) snackbar({ message: t("notification.permission-denied") });
+    if (!import.meta.env.TAURI_ENV_PLATFORM && isPermissionDenied())
+        snackbar({ message: t("notification.permission-denied") });
     send({
         title: t("notification.test-title"),
         dir: "auto",

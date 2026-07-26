@@ -121,7 +121,7 @@ watch(
         if (systemNotificationStore.enable) {
             if (!isNotifcationSupported.value)
                 snackbar({ message: t("notification.not-supported") });
-            if (isNotifcationPermissionDenied())
+            if (!import.meta.env.TAURI_ENV_PLATFORM && isNotifcationPermissionDenied())
                 snackbar({ message: t("notification.permission-denied") });
             send({
                 title: t("notification.hash-generated"),
