@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import "@mdui/icons/notifications-active--outlined.js";
+import { snackbar } from "mdui";
 import "mdui/components/list-item.js";
 import "mdui/components/switch.js";
-import "@mdui/icons/notifications-active--outlined.js";
-import { useWebNotification } from "@vueuse/core";
-import { snackbar } from "mdui";
 import { watch } from "vue";
 import { useI18n } from "vue-i18n";
 
+import { useNotification } from "@/composables/useNotification";
 import { NOTIFICATION_TAG } from "@/interfaces/constants";
 
 const props = defineProps<{
@@ -19,22 +19,17 @@ defineEmits<{
 
 const { t } = useI18n();
 
-const { isSupported, permissionGranted, show } = useWebNotification();
+const { isSupported, isPermissionDenied, send } = useNotification();
 
 const sendTestNotification = () => {
-    if (isSupported.value && permissionGranted.value) {
-        show({
-            title: t("notification.test-title"),
-            dir: "auto",
-            lang: "zh",
-            renotify: true,
-            tag: NOTIFICATION_TAG,
-        });
-    } else {
-        snackbar({
-            message: t("notification.not-supported"),
-        });
-    }
+    if (!isSupported.value) snackbar({ message: t("notification.not-supported") });
+    if (isPermissionDenied()) snackbar({ message: t("notification.permission-denied") });
+    send({
+        title: t("notification.test-title"),
+        dir: "auto",
+        lang: "zh",
+        tag: NOTIFICATION_TAG,
+    });
 };
 
 // 可能需要在确定一次以后再也不显示弹窗
@@ -63,7 +58,7 @@ watch(
     <mdui-list-item
         :headline="t('settings.system-notification.label')"
         :description="t('settings.system-notification.description')"
-        @click.self="$emit('change', !checked)"
+        @click.self="if (isSupported && !isPermissionDenied()) $emit('change', !checked);"
     >
         <mdui-icon-notifications-active--outlined
             slot="icon"
@@ -74,13 +69,15 @@ watch(
             @change.self="
                 (e: CustomEvent<void> & Event) => {
                     if (e.target && 'checked' in e.target) {
-                        $emit('change', (e.target as HTMLInputElement).checked);
+                        if (isSupported) {
+                            $emit('change', (e.target as HTMLInputElement).checked);
+                        }
                     }
                 }
             "
         ></mdui-switch>
     </mdui-list-item>
-    <mdui-button v-if="checked" variant="tonal" full-width>
+    <mdui-button v-if="checked" variant="tonal" full-width @click="sendTestNotification">
         {{ t("settings.system-notification.button") }}
     </mdui-button>
 </template>

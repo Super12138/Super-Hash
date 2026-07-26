@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useClipboard, useWebNotification } from "@vueuse/core";
+import { useClipboard } from "@vueuse/core";
 import { snackbar } from "mdui";
 import "mdui/components/card.js";
 import "mdui/components/circular-progress.js";
@@ -8,6 +8,7 @@ import "mdui/components/tooltip.js";
 import { computed, ref, Teleport, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
+import { useNotification } from "@/composables/useNotification.ts";
 import { Algorithms } from "@/interfaces/Algorithms";
 import { NOTIFICATION_TAG } from "@/interfaces/constants";
 import { FileStatus } from "@/interfaces/FileStatus";
@@ -31,9 +32,9 @@ const systemNotificationStore = useSystemNotificationStore();
 const { copy, copied, isSupported: isClipboardSupported } = useClipboard();
 const {
     isSupported: isNotifcationSupported,
-    permissionGranted,
-    show: showNotification,
-} = useWebNotification();
+    isPermissionDenied: isNotifcationPermissionDenied,
+    send,
+} = useNotification();
 
 const shouldShowCompare = computed(() => {
     return (
@@ -118,19 +119,16 @@ watch(
         }
         if (autoCopyStore.enable) copyHash();
         if (systemNotificationStore.enable) {
-            if (isNotifcationSupported.value && permissionGranted.value) {
-                showNotification({
-                    title: t("notification.hash-generated"),
-                    dir: "auto",
-                    lang: "zh",
-                    renotify: true,
-                    tag: NOTIFICATION_TAG,
-                });
-            } else {
-                snackbar({
-                    message: t("notification.not-supported"),
-                });
-            }
+            if (!isNotifcationSupported.value)
+                snackbar({ message: t("notification.not-supported") });
+            if (isNotifcationPermissionDenied())
+                snackbar({ message: t("notification.permission-denied") });
+            send({
+                title: t("notification.hash-generated"),
+                dir: "auto",
+                lang: "zh",
+                tag: NOTIFICATION_TAG,
+            });
         }
     }
 );
