@@ -39,7 +39,7 @@ onChange((files: FileList | null) => {
 <template>
     <mdui-card variant="outlined" clickable @click="open">
         <mdui-icon-upload-file--outlined></mdui-icon-upload-file--outlined>
-        <p>{{ t("choose-file.label") }}</p>
+        <p class="file-choose-title">{{ t("choose-file.label") }}</p>
         <small>{{ t("choose-file.helper") }}</small>
         <p class="file-info">{{ fileInfo }}</p>
     </mdui-card>
@@ -60,6 +60,17 @@ onChange((files: FileList | null) => {
     white-space: nowrap;
     text-align: center;
     width: 100%;
+    line-height: var(--mdui-typescale-label-medium-line-height) !important;
+    font-size: var(--mdui-typescale-label-medium-size) !important;
+    letter-spacing: var(--mdui-typescale-label-medium-tracking) !important;
+    font-weight: var(--mdui-typescale-label-medium-weight) !important;
+}
+
+.file-choose-title {
+    line-height: var(--mdui-typescale-body-large-line-height) !important;
+    font-size: var(--mdui-typescale-body-large-size) !important;
+    letter-spacing: var(--mdui-typescale-body-large-tracking) !important;
+    font-weight: var(--mdui-typescale-body-large-weight) !important;
 }
 
 small {
@@ -73,7 +84,7 @@ p {
 mdui-icon-upload-file--outlined {
     font-size: var(--mdui-typescale-headline-large-size);
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 mdui-card {

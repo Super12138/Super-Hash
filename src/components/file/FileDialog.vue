@@ -177,6 +177,7 @@ tbody td,
 tbody th {
     padding: 0.875rem 1rem;
     border: 0.0625rem solid rgb(var(--mdui-color-surface-variant));
+    vertical-align: middle;
 }
 
 tbody tr th[colspan="2"] {

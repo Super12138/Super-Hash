@@ -113,9 +113,9 @@
         "basic-info": {
             "title": "基本信息",
             "file-name": "文件名",
-            "mode": "计算模式",
-            "algorithm": "计算算法",
-            "status": "计算状态",
+            "mode": "模式",
+            "algorithm": "算法",
+            "status": "状态",
             "add-time": "添加时间"
         },
         "checksum-info": {

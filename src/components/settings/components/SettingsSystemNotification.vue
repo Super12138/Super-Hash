@@ -84,9 +84,3 @@ watch(
         {{ t("settings.system-notification.button") }}
     </mdui-button>
 </template>
-
-<style lang="css" scoped>
-mdui-button {
-    margin: 0.5rem 1rem;
-}
-</style>
