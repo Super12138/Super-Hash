@@ -1,3 +1,4 @@
+import { isTauri } from "@tauri-apps/api/core";
 import {
     isPermissionGranted,
     requestPermission,
@@ -22,7 +23,7 @@ export function useNotification() {
         return Notification.permission === "denied";
     }
     async function permissionGranted() {
-        if (import.meta.env.TAURI_ENV_PLATFORM) {
+        if (isTauri()) {
             console.log("in tauri");
 
             return await isPermissionGranted();
@@ -38,7 +39,7 @@ export function useNotification() {
     const { on: onClick, trigger: clickTrigger } = createEventHook<Event>();
 
     async function getPermission() {
-        if (import.meta.env.TAURI_ENV_PLATFORM) {
+        if (isTauri()) {
             const permission = await requestPermission();
             return permission === "granted";
         } else {
@@ -59,7 +60,7 @@ export function useNotification() {
     }
 
     async function sendOneNotification(options: NotificationOptions) {
-        if (import.meta.env.TAURI_ENV_PLATFORM) {
+        if (isTauri()) {
             console.log("in Tauri env, send by tauri api");
 
             sendNotification({
@@ -92,7 +93,9 @@ export function useNotification() {
                 }
 
                 try {
-                    console.log("failed to send service worker notification, trying native notification");
+                    console.log(
+                        "failed to send service worker notification, trying native notification"
+                    );
                     new Notification(options.title || "", {
                         body: options.body,
                         lang: options.lang,

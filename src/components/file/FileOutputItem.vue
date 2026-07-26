@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { isTauri } from "@tauri-apps/api/core";
 import { useClipboard } from "@vueuse/core";
 import { snackbar } from "mdui";
 import "mdui/components/card.js";
@@ -119,10 +120,16 @@ watch(
         }
         if (autoCopyStore.enable) copyHash();
         if (systemNotificationStore.enable) {
-            if (!isNotifcationSupported.value)
+            if (!isNotifcationSupported.value) {
                 snackbar({ message: t("notification.not-supported") });
-            if (!import.meta.env.TAURI_ENV_PLATFORM && isNotifcationPermissionDenied())
-                snackbar({ message: t("notification.permission-denied") });
+                return;
+            }
+            if (!isTauri()) {
+                if (isNotifcationPermissionDenied()) {
+                    snackbar({ message: t("notification.permission-denied") });
+                    return;
+                }
+            }
             send({
                 title: t("notification.hash-generated"),
                 dir: "auto",

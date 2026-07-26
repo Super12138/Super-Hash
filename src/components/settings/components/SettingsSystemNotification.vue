@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import "@mdui/icons/notifications-active--outlined.js";
+import { isTauri } from "@tauri-apps/api/core";
 import { snackbar } from "mdui";
 import "mdui/components/list-item.js";
 import "mdui/components/switch.js";
@@ -22,9 +23,16 @@ const { t } = useI18n();
 const { isSupported, isPermissionDenied, send } = useNotification();
 
 const sendTestNotification = () => {
-    if (!isSupported.value) snackbar({ message: t("notification.not-supported") });
-    if (!import.meta.env.TAURI_ENV_PLATFORM && isPermissionDenied())
-        snackbar({ message: t("notification.permission-denied") });
+    if (!isSupported.value) {
+        snackbar({ message: t("notification.not-supported") });
+        return;
+    }
+    if (!isTauri()) {
+        if (isPermissionDenied()) {
+            snackbar({ message: t("notification.permission-denied") });
+            return;
+        }
+    }
     send({
         title: t("notification.test-title"),
         dir: "auto",
