@@ -131,7 +131,10 @@ watch(
                 }
             }
             send({
-                title: t("notification.hash-generated"),
+                title: t("notification.hash-generated", {
+                    algorithm: props.fileItem.algorithm,
+                    hash: props.fileItem.hash,
+                }),
                 dir: "auto",
                 lang: "zh",
                 tag: NOTIFICATION_TAG,
