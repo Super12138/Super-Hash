@@ -163,7 +163,8 @@
         "copy-failed": "无法写入剪贴板"
     },
     "notification": {
-        "not-supported": "您的浏览器不支持通知或未授权通知权限",
+        "not-supported": "不支持通知功能",
+        "permission-denied": "通知权限被拒绝",
         "hash-generated": "计算完成，{algorithm} 值为 {hash}",
         "test-title": "这是一条测试通知"
     },

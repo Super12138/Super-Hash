@@ -151,12 +151,13 @@
     "clipboard": {
         "copy-successful": "Copied to clipboard",
         "copy-failed": "Failed copy to clipboard",
-        "not-supported": "\nCopying not supported"
+        "not-supported": "Copying not supported"
     },
     "notification": {
-        "not-supported": "Browser notifications arenot supported or denied the permission",
+        "not-supported": "Notifications are not supported",
         "hash-generated": "Calculation finished. {algorithm}: {hash}",
-        "test-title": "This is a test notification"
+        "test-title": "This is a test notification",
+        "permission-denied": "Notification permission denied"
     },
     "status": {
         "canceled": "Canceled",
