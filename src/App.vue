@@ -33,7 +33,7 @@ import SimpleDialog from "./components/shared/SimpleDialog.vue";
 import UpdateDialog from "./components/update/UpdateDialog.vue";
 import { useFileList } from "./composables/useFileList.ts";
 import { Algorithms } from "./interfaces/Algorithms";
-import { Modes, toMode } from "./interfaces/Modes";
+import { Modes } from "./interfaces/Modes";
 import { Platform } from "./interfaces/Platform.ts";
 import type { MainPostData, ProgressInfo, WorkerPostData } from "./interfaces/WorkerMessage";
 import { WorkerResult } from "./interfaces/WorkerResults";

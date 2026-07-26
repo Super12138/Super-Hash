@@ -53,7 +53,7 @@ const checksumStatusClass = computed(() => {
         ref="dialog"
     >
         <div>
-            <table class="mdui-table">
+            <table>
                 <!-- <thead>
                     <tr>
                         <th scope="col">属性</th>

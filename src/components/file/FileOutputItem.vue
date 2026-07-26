@@ -139,6 +139,7 @@ watch(
 <template>
     <mdui-list-item
         :headline="fileItem.name"
+        headline-line="3"
         :description="statusText"
         @click="isDialogOpen = true"
     >
