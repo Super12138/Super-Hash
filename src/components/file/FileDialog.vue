@@ -4,6 +4,8 @@ import type { Dialog } from "mdui/components/dialog.js";
 import { computed, useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
 
+import CopyableCode from "../shared/CopyableCode.vue";
+
 const { t, d, locale } = useI18n();
 
 const isOpen = defineModel<boolean>({ required: true });
@@ -20,8 +22,6 @@ const props = defineProps<{
     showCompare: boolean;
     isCheckSumMatch: boolean;
 }>();
-
-defineEmits<{ (e: "copy-hash"): void }>();
 
 const onClosed = () => {
     isOpen.value = false;
@@ -98,15 +98,13 @@ const checksumStatusClass = computed(() => {
                                 {{ t("file-dialog.checksum-info.checksum-generate") }}
                             </th>
                             <td>
-                                <mdui-tooltip :content="t('click-to-copy')" placement="bottom">
-                                    <code @click="$emit('copy-hash')">{{ hash }}</code>
-                                </mdui-tooltip>
+                                <CopyableCode :code="hash" />
                             </td>
                         </tr>
                         <tr v-if="checkSum?.trim() != ''">
                             <th scope="row">{{ t("file-dialog.checksum-info.checksum-user") }}</th>
                             <td>
-                                <code @click="$emit('copy-hash')">{{ checkSum }}</code>
+                                <CopyableCode :code="checkSum" />
                             </td>
                         </tr>
                         <tr v-if="showCompare">

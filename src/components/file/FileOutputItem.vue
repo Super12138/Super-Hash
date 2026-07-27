@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { isTauri } from "@tauri-apps/api/core";
 import { useClipboard } from "@vueuse/core";
 import { snackbar } from "mdui";
 import "mdui/components/card.js";
@@ -30,7 +29,7 @@ const isChecksumMatch = ref<boolean>(false);
 const autoCopyStore = useAutoCopyStore();
 const systemNotificationStore = useSystemNotificationStore();
 
-const { copy, copied, isSupported: isClipboardSupported } = useClipboard();
+const { copy, isSupported: isClipboardSupported } = useClipboard();
 const {
     isSupported: isNotifcationSupported,
     isPermissionDenied: isNotifcationPermissionDenied,
@@ -167,7 +166,6 @@ watch(
             :showCompare="shouldShowCompare"
             :isCheckSumMatch="isChecksumMatch"
             v-model="isDialogOpen"
-            @copy-hash="copyHash()"
         />
     </Teleport>
 </template>

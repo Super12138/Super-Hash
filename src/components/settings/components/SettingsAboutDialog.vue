@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import { useClipboard } from "@vueuse/core";
-import { snackbar } from "mdui";
 import "mdui/components/dialog.js";
 import type { Dialog } from "mdui/components/dialog.js";
 import "mdui/components/divider.js";
 import { computed, useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
 
+import CopyableCode from "@/components/shared/CopyableCode.vue";
 import { OPEN_SOURCE_LIBRARIES } from "@/interfaces/constants";
 import { Platform } from "@/interfaces/Platform";
 
 const isDialogOpen = defineModel<boolean>({ required: true });
 const dialogRef = useTemplateRef<Dialog>("dialog");
-const { copy, copied, isSupported: isClipboardSupported } = useClipboard();
 
 const { t } = useI18n();
 
@@ -31,17 +29,6 @@ const version = computed(() => {
 });
 
 const buildTime = BUILD_TIME;
-
-const copyVersion = () => {
-    if (!isClipboardSupported.value) {
-        snackbar({ message: t("clipboard.not-supported") });
-        return;
-    } else {
-        copy(version.value)
-            .then(() => snackbar({ message: t("clipboard.copy-successful") }))
-            .catch((e) => snackbar({ message: t("clipboard.copy-failed", { error: e }) }));
-    }
-};
 </script>
 
 <template>
@@ -58,12 +45,10 @@ const copyVersion = () => {
 
         <p style="margin-top: 5px">
             {{ t("settings.about.dialog.version") }}
-            <mdui-tooltip :content="t('click-to-copy')">
-                <code style="cursor: pointer" @click="copyVersion">{{ version }}</code>
-            </mdui-tooltip>
+            <CopyableCode :code="version" />
             <br />
             {{ t("settings.about.dialog.build-time") }}
-            <code>{{ buildTime }}</code>
+            <CopyableCode :code="buildTime" />
         </p>
 
         <p style="margin-top: 1.5rem">
