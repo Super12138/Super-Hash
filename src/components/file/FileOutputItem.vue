@@ -109,7 +109,7 @@ const algorithmText = computed(() =>
 
 watch(
     () => props.fileItem.hash,
-    () => {
+    async () => {
         if (shouldShowCompare.value) {
             // showCompare 的值里已经计算了 hash 和 checkSum 一定不为空，因此下方使用非空断言
             isChecksumMatch.value =
@@ -122,11 +122,9 @@ watch(
                 snackbar({ message: t("notification.not-supported") });
                 return;
             }
-            if (!isTauri()) {
-                if (isNotifcationPermissionDenied()) {
-                    snackbar({ message: t("notification.permission-denied") });
-                    return;
-                }
+            if (await isNotifcationPermissionDenied()) {
+                snackbar({ message: t("notification.permission-denied") });
+                return;
             }
             send({
                 title: t("notification.hash-generated", {

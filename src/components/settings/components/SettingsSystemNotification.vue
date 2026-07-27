@@ -22,16 +22,14 @@ const { t } = useI18n();
 
 const { isSupported, isPermissionDenied, send } = useNotification();
 
-const sendTestNotification = () => {
+const sendTestNotification = async () => {
     if (!isSupported.value) {
         snackbar({ message: t("notification.not-supported") });
         return;
     }
-    if (!isTauri()) {
-        if (isPermissionDenied()) {
-            snackbar({ message: t("notification.permission-denied") });
-            return;
-        }
+    if (await isPermissionDenied()) {
+        snackbar({ message: t("notification.permission-denied") });
+        return;
     }
     send({
         title: t("notification.test-title"),
