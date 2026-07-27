@@ -65,7 +65,7 @@ watch(
     <mdui-list-item
         :headline="t('settings.system-notification.label')"
         :description="t('settings.system-notification.description')"
-        @click.self="if (isSupported && !isPermissionDenied()) $emit('change', !checked);"
+        @click.self="if (isSupported) $emit('change', !checked);"
     >
         <mdui-icon-notifications-active--outlined
             slot="icon"
