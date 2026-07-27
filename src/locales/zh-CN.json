@@ -144,7 +144,8 @@
             "latest": "当前已是最新版本",
             "error": "检查更新时出错（{error}）"
         },
-        "failed": "更新失败（{error}）"
+        "failed": "更新失败（{error}）",
+        "invalid-response": "更新内容无效"
     },
     "warning": "警告",
     "tip": "提示",
