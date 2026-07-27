@@ -19,14 +19,15 @@ export interface NotificationOptions {
 
 export function useNotification() {
     const isSupported = useSupported(() => "Notification" in window);
-    
+
     // add more debug log
     async function isPermissionDenied() {
         console.log("checking if permission is denied");
         if (isTauri()) {
             console.log("in tauri");
-            console.log("permission in tauri:", window.Notification.permission);
-            return await Promise.resolve(window.Notification.permission === "denied");
+            const permission = await requestPermission();
+            console.log("permission in tauri:", permission);
+            return permission === "denied";
         } else {
             console.log("in browser");
             console.log("permission in browser:", Notification.permission);
