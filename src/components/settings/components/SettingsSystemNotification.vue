@@ -4,7 +4,7 @@ import { isTauri } from "@tauri-apps/api/core";
 import { snackbar } from "mdui";
 import "mdui/components/list-item.js";
 import "mdui/components/switch.js";
-import { watch } from "vue";
+import { Transition, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useNotification } from "@/composables/useNotification";
@@ -86,7 +86,40 @@ watch(
             "
         ></mdui-switch>
     </mdui-list-item>
-    <mdui-button v-if="checked" variant="tonal" full-width @click="sendTestNotification">
-        {{ t("settings.system-notification.button") }}
-    </mdui-button>
+    <Transition name="slide-up">
+        <mdui-button v-if="checked" variant="tonal" @click="sendTestNotification">
+            {{ t("settings.system-notification.button") }}
+        </mdui-button>
+    </Transition>
 </template>
+
+<style lang="css" scoped>
+mdui-button {
+    margin: 0.5rem 1rem;
+}
+
+.slide-up-enter-from {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.slide-up-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-up-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.25s ease-out;
+}
+</style>
