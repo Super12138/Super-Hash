@@ -161,7 +161,7 @@
     "clipboard": {
         "not-supported": "当前浏览器不支持复制功能",
         "copy-successful": "成功写入剪贴板",
-        "copy-failed": "无法写入剪贴板"
+        "copy-failed": "无法写入剪贴板（{error}）"
     },
     "notification": {
         "not-supported": "不支持通知功能",

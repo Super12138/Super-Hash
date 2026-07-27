@@ -50,14 +50,12 @@ const copyHash = () => {
         snackbar({ message: t("clipboard.not-supported") });
         return;
     }
-    if (props.fileItem.hash !== undefined) {
-        copy(props.fileItem.hash);
-        if (copied.value) {
-            snackbar({ message: t("clipboard.copy-successful") });
-        } else {
-            snackbar({ message: t("clipboard.copy-failed") });
-        }
-    }
+
+    if (props.fileItem.hash === undefined) return;
+
+    copy(props.fileItem.hash)
+        .then(() => snackbar({ message: t("clipboard.copy-successful") }))
+        .catch((e) => snackbar({ message: t("clipboard.copy-failed", { error: e }) }));
 };
 
 const estimatedTime = computed(() => {

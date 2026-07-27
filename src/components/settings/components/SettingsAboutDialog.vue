@@ -37,12 +37,9 @@ const copyVersion = () => {
         snackbar({ message: t("clipboard.not-supported") });
         return;
     } else {
-        copy(version.value);
-        if (copied) {
-            snackbar({ message: t("clipboard.copy-successful") });
-        } else {
-            snackbar({ message: t("clipboard.copy-failed") });
-        }
+        copy(version.value)
+            .then(() => snackbar({ message: t("clipboard.copy-successful") }))
+            .catch((e) => snackbar({ message: t("clipboard.copy-failed", { error: e }) }));
     }
 };
 </script>
@@ -62,11 +59,11 @@ const copyVersion = () => {
         <p style="margin-top: 5px">
             {{ t("settings.about.dialog.version") }}
             <mdui-tooltip :content="t('click-to-copy')">
-                <span style="cursor: pointer" @click="copyVersion">{{ version }}</span>
+                <code style="cursor: pointer" @click="copyVersion">{{ version }}</code>
             </mdui-tooltip>
             <br />
             {{ t("settings.about.dialog.build-time") }}
-            <span>{{ buildTime }}</span>
+            <code>{{ buildTime }}</code>
         </p>
 
         <p style="margin-top: 1.5rem">

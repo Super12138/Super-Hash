@@ -151,7 +151,7 @@
     "tip": "Tip",
     "clipboard": {
         "copy-successful": "Copied to clipboard",
-        "copy-failed": "Failed copy to clipboard",
+        "copy-failed": "Failed copy to clipboard ({error})",
         "not-supported": "Copying not supported"
     },
     "notification": {
