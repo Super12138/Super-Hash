@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import "mdui/components/dialog.js";
+import { watchDebounced } from "@vueuse/core";
 import { setColorScheme } from "mdui";
+import "mdui/components/dialog.js";
 import type { Dialog } from "mdui/components/dialog.js";
-import { ref, useTemplateRef, watch } from "vue";
+import { ref, useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useThemeColorStore } from "@/stores/settings/themeColor";
@@ -44,9 +45,13 @@ const resetToDefault = () => {
     }
 };
 
-watch(inputColor, (newColor) => {
-    setColorScheme(newColor);
-});
+watchDebounced(
+    inputColor,
+    (newColor) => {
+        setColorScheme(newColor);
+    },
+    { debounce: 100, maxWait: 1_000 }
+);
 </script>
 
 <template>
@@ -71,3 +76,9 @@ watch(inputColor, (newColor) => {
         </mdui-button>
     </mdui-dialog>
 </template>
+
+<style lang="css" scoped>
+input {
+    width: 100%;
+}
+</style>
