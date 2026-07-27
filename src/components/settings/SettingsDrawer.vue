@@ -63,7 +63,7 @@ const closeDrawer = () => {
                 <mdui-icon-close--outlined></mdui-icon-close--outlined>
             </mdui-button-icon>
         </div>
-        <mdui-list>
+        <mdui-list style="flex-direction: column; justify-content: center; display: flex">
             <SettingsCacheSize
                 :model-value="cacheSizeStore.size"
                 @update:model-value="
