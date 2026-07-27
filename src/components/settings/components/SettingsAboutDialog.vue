@@ -61,7 +61,11 @@ const buildTime = BUILD_TIME;
             {{ t("settings.about.dialog.author.suffix") }}
         </p>
         <img width="35%" src="../../../assets/gpl.svg" />
-        <p>{{ t("settings.about.dialog.licence") }}</p>
+        <p>
+            <a target="_blank" href="https://github.com/Super12138/Super-Hash/blob/main/LICENSE">
+                {{t("settings.about.dialog.licence")}}
+            </a>
+        </p>
 
         <mdui-divider></mdui-divider>
 
