@@ -34,7 +34,7 @@ const newVersion = ref<string>("");
 const downloadStatus = ref<DownloadStatus>(DownloadStatus.Fetching);
 const downloadProgress = ref<number | undefined>(undefined);
 
-const { isFetching, error, data, abort, execute } = useFetch(UPDATE_URL, {
+const { isFetching, error, data, abort, execute } = useFetch<string>(UPDATE_URL, {
     immediate: false,
     timeout: 5000,
 });
@@ -50,8 +50,18 @@ watch(
 
 watch(data, (responseData) => {
     if (!responseData || !autoUpdateStore.enable) return;
-    const releaseData = JSON.parse(responseData as string) as GitHubRelease;
-    const remoteVer = releaseData.name;
+
+    let releaseData: GitHubRelease;
+    try {
+        releaseData = JSON.parse(responseData) as GitHubRelease;
+    } catch {
+        snackbar({
+            message: t("update-dialog.invalid-response"),
+        });
+        return;
+    }
+
+    const remoteVer = releaseData.tag_name.replace(/^v/, "");
     newVersion.value = releaseData.name;
     if (lt(VERSION_NAME, remoteVer)) {
         console.log("检测到新版本");
