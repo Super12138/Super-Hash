@@ -11,5 +11,6 @@
             "matchDepTypes": ["dependencies"],
             "matchUpdateTypes": ["minor", "patch"]
         }
-    ]
+    ],
+    "minimumReleaseAge": "3 days"
 }
