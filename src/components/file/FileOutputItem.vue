@@ -58,7 +58,7 @@ const copyHash = () => {
 };
 
 const estimatedTime = computed(() => {
-    const { hours, minutes, seconds } = formatTime(props.fileItem.estimetedTime);
+    const { hours, minutes, seconds } = formatTime(props.fileItem.estimatedTime);
 
     if (hours > 0) {
         return t("time.hours-minutes-seconds", { hours, minutes, seconds });

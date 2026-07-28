@@ -104,7 +104,7 @@ const checksumStatusClass = computed(() => {
                         <tr v-if="checkSum?.trim() != ''">
                             <th scope="row">{{ t("file-dialog.checksum-info.checksum-user") }}</th>
                             <td>
-                                <CopyableCode :code="checkSum" />
+                                <CopyableCode :code="checkSum ?? ''" />
                             </td>
                         </tr>
                         <tr v-if="showCompare">

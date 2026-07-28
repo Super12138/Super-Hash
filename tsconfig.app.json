@@ -9,6 +9,6 @@
             "@/*": ["./src/*"]
         },
 
-        "strict": false
+        "strict": true
     }
 }

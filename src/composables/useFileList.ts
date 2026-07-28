@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 import { FileItem } from "@/components/file/FileItem";
 import type { Algorithms } from "@/interfaces/Algorithms";
@@ -7,24 +7,21 @@ import type { Modes } from "@/interfaces/Modes";
 
 export function useFileList() {
     const fileList = ref<FileItem[]>([]);
+    const currentFile = computed(() => fileList.value.at(-1));
 
     function addFile(file: File) {
         const fileIItem = new FileItem(Date.now(), file.name);
         const last = fileList.value.at(-1);
 
-        if (fileList.value.length > 0 && last.status === FileStatus.Waiting) {
+        if (last && last.status === FileStatus.Waiting) {
             fileList.value[fileList.value.length - 1] = fileIItem;
         } else {
             fileList.value.push(fileIItem);
         }
     }
 
-    function getCurrentFile(): FileItem {
-        return fileList.value.at(-1);
-    }
-
     function setCurrentFileStartCompute(algorithm: Algorithms, mode: Modes, checkSum?: string) {
-        const file = getCurrentFile();
+        const file = currentFile.value;
 
         if (!file) return;
 
@@ -36,16 +33,16 @@ export function useFileList() {
     }
 
     function updateProgress(progress: number, estimatedRemainingTime: number) {
-        const file = getCurrentFile();
+        const file = currentFile.value;
 
         if (!file) return;
 
         file.progress = progress;
-        file.estimetedTime = estimatedRemainingTime;
+        file.estimatedTime = estimatedRemainingTime;
     }
 
     function finishCompute(hash: string) {
-        const file = getCurrentFile();
+        const file = currentFile.value;
 
         if (!file) return;
 
@@ -55,8 +52,8 @@ export function useFileList() {
 
     return {
         fileList,
+        currentFile,
         addFile,
-        getCurrentFile,
         setCurrentFileStartCompute,
         updateProgress,
         finishCompute,

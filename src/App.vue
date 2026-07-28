@@ -33,6 +33,7 @@ import SimpleDialog from "./components/shared/SimpleDialog.vue";
 import UpdateDialog from "./components/update/UpdateDialog.vue";
 import { useFileList } from "./composables/useFileList.ts";
 import { Algorithms } from "./interfaces/Algorithms";
+import { FileStatus } from "./interfaces/FileStatus.ts";
 import { Modes } from "./interfaces/Modes";
 import { Platform } from "./interfaces/Platform.ts";
 import type { MainPostData, ProgressInfo, WorkerPostData } from "./interfaces/WorkerMessage";
@@ -43,8 +44,8 @@ import { useFileConfigurationStore } from "./stores/ui/file-configuration";
 
 const {
     fileList,
+    currentFile,
     addFile,
-    getCurrentFile,
     setCurrentFileStartCompute,
     updateProgress,
     finishCompute,
@@ -70,6 +71,9 @@ const enablePWA = Platform.isWeb || Platform.isDev;
 const enableUpdateDialog = Platform.isDesktopDefault || Platform.isDev;
 
 const isCheckMode = computed(() => fileConfig.mode === Modes.Check);
+const enableCalculateBtn = computed(() =>
+    currentFile.value ? currentFile.value.status !== FileStatus.Computing : false
+);
 
 const toggleFileDrawer = () => {
     openFileOutputDrawer.value = !openFileOutputDrawer.value;
@@ -121,7 +125,7 @@ const calculateHash = () => {
         }
     }
 
-    if (!getCurrentFile()) return;
+    if (!currentFile.value) return;
     setCurrentFileStartCompute(fileConfig.algorithm, fileConfig.mode, fileConfig.checkSum);
 
     openOnlyFileDrawer();
@@ -209,7 +213,7 @@ onUnmounted(() => {
                         }
                     "
                 />
-                <CheckButton @click="calculateHash()" />
+                <CheckButton :disabled="!enableCalculateBtn" @click="calculateHash()" />
             </main>
         </mdui-layout-main>
     </mdui-layout>
