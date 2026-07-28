@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import "@mdui/icons/close--outlined.js";
 import "mdui/components/button-icon.js";
 import "mdui/components/list.js";
 import "mdui/components/navigation-drawer.js";
-import "@mdui/icons/close--outlined.js";
 import type { NavigationDrawer } from "mdui/components/navigation-drawer.js";
 import { useTemplateRef } from "vue";
 import { useI18n } from "vue-i18n";
@@ -25,13 +25,13 @@ import SettingsReset from "./components/SettingsReset.vue";
 import SettingsSystemNotification from "./components/SettingsSystemNotification.vue";
 import SettingsThemeColor from "./components/SettingsThemeColor.vue";
 
+const isOpen = defineModel<boolean>({ required: true });
+
 const cacheSizeStore = useCacheSizeStore();
 const algorithmSuggestStore = useAlgorithmSuggestStore();
 const systemNotificationStore = useSystemNotificationStore();
 const autoUpdateStore = useAutoUpdateStore();
 const autoCopyStore = useAutoCopyStore();
-
-const isOpen = defineModel<boolean>({ required: true });
 
 const { t } = useI18n();
 const settingsDrawer = useTemplateRef<NavigationDrawer>("settings-drawer");

@@ -40,6 +40,7 @@ import type { MainPostData, ProgressInfo, WorkerPostData } from "./interfaces/Wo
 import { WorkerResult } from "./interfaces/WorkerResults";
 import { useCacheSizeStore } from "./stores/settings/cacheSize";
 import { useThemeColorStore } from "./stores/settings/themeColor";
+import { useDrawerStore } from "./stores/ui/drawer.ts";
 import { useFileConfigurationStore } from "./stores/ui/file-configuration";
 
 const {
@@ -63,38 +64,15 @@ const { data: workerData, post, terminate } = useWebWorker(fileWorker);
 const fileConfig = useFileConfigurationStore();
 const themeColor = useThemeColorStore();
 const cacheSize = useCacheSizeStore();
-
-const openFileOutputDrawer = ref(false);
-const openSettingsDrawer = ref(false);
+const drawer = useDrawerStore();
 
 const enablePWA = Platform.isWeb || Platform.isDev;
 const enableUpdateDialog = Platform.isDesktopDefault || Platform.isDev;
 
 const isCheckMode = computed(() => fileConfig.mode === Modes.Check);
 const enableCalculateBtn = computed(() =>
-    currentFile.value ? currentFile.value.status !== FileStatus.Computing : false
+    currentFile.value ? currentFile.value.status !== FileStatus.Computing : true
 );
-
-const toggleFileDrawer = () => {
-    openFileOutputDrawer.value = !openFileOutputDrawer.value;
-    if (openSettingsDrawer.value) {
-        openSettingsDrawer.value = false;
-    }
-};
-
-const toggleSettingsDrawer = () => {
-    openSettingsDrawer.value = !openSettingsDrawer.value;
-    if (openFileOutputDrawer.value) {
-        openFileOutputDrawer.value = false;
-    }
-};
-
-const openOnlyFileDrawer = () => {
-    openFileOutputDrawer.value = true;
-    if (openSettingsDrawer.value) {
-        openSettingsDrawer.value = false;
-    }
-};
 
 const processFile = (file: File) => {
     addFile(file);
@@ -128,7 +106,7 @@ const calculateHash = () => {
     if (!currentFile.value) return;
     setCurrentFileStartCompute(fileConfig.algorithm, fileConfig.mode, fileConfig.checkSum);
 
-    openOnlyFileDrawer();
+    drawer.openOnlyOutputDrawer();
 
     const msg: MainPostData = {
         file: fileConfig.file!,
@@ -178,8 +156,8 @@ onUnmounted(() => {
     <mdui-layout>
         <nav>
             <HashTopBar
-                @toggle-output="toggleFileDrawer()"
-                @toggle-settings="toggleSettingsDrawer()"
+                @toggle-output="drawer.toggleOutputDrawer()"
+                @toggle-settings="drawer.toggleSettingsDrawer()"
             />
         </nav>
 
@@ -218,10 +196,10 @@ onUnmounted(() => {
         </mdui-layout-main>
     </mdui-layout>
     <aside>
-        <FileOutputDrawer :file-list="fileList" v-model="openFileOutputDrawer" />
+        <FileOutputDrawer :file-list="fileList" v-model="drawer.isOutputDrawerOpen" />
     </aside>
     <aside>
-        <SettingsDrawer v-model="openSettingsDrawer" />
+        <SettingsDrawer v-model="drawer.isSettingsDrawerOpen" />
     </aside>
 
     <SimpleDialog
