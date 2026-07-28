@@ -63,7 +63,7 @@ const buildTime = BUILD_TIME;
         <img width="35%" src="../../../assets/gpl.svg" />
         <p>
             <a target="_blank" href="https://github.com/Super12138/Super-Hash/blob/main/LICENSE">
-                {{t("settings.about.dialog.licence")}}
+                {{ t("settings.about.dialog.licence") }}
             </a>
         </p>
 
