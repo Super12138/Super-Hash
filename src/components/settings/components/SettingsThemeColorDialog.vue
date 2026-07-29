@@ -59,7 +59,7 @@ watchDebounced(
         :headline="t('settings.theme-color.dialog.headline')"
         :description="t('settings.theme-color.dialog.description')"
         :open="isOpen"
-        close-on-overlay-click="true"
+        close-on-overlay-click="false"
         @closed.self="onClosed()"
         ref="dialog"
     >

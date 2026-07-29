@@ -2,7 +2,7 @@
     <img src="https://cdn.jsdelivr.net/gh/Super12138/Super-Hash@fd35e8a/build/appicon.svg" width="30%">
 </p>
 
-# Super Hash (formerly Hash Checker)
+# Super Hash
 
 ![GitHub](https://img.shields.io/github/license/Super12138/Super-Hash?style=flat-square)
 ![GitHub all releases](https://img.shields.io/github/downloads/Super12138/Super-Hash/total?style=flat-square)
@@ -10,63 +10,65 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/Super12138/Super-Hash?style=flat-square)
 
 A quick, readily available cross-platform hash checker that follows Material Design 3
-<br>
-[中文（简体）](README.md)| <strong>English</strong>
+
+This document is available in: [中文（简体）](README.md)| <strong>English</strong>
 
 ## ✨ Features
 
-- Supports Material Design 3 and custom theme colors
-- Supports Windows and macOS
+- Minimal application size (Desktop installer ~3MB, Web total resources ~1MB)
+- Material Design 3 design system
+- Supports Windows, macOS, and Web (Browser) platforms
+- Customizable theme colors
 - Supports dark mode
 - Validates and generates MD5 or any SHA values
-- Automatic update checking
 - PWA (Progressive Web App)
 
 ## 📒 Usage
 
-[Simple Usage Instructions](https://super12138.github.io/hschecker/use.html)
+[Simple Usage Instructions](https://super12138.pages.dev/apps/super-hash/use.html)
 
 ## ⬇️ Download
 
 **It is strongly recommended to download/use Super Hash from the official channels below**
 
-- Offline version V3.0.0[GitHub Release](https://github.com/Super12138/Super-Hash/releases)
-- Online version V3.0.0[Github Page](https://super12138.github.io/Super-Hash/)
+- Offline version v4.0.0 [GitHub Release](https://github.com/Super12138/Super-Hash/releases)
+- Online version v4.0.0 [Cloudflare Pages](https://super-hash.pages.dev/)
 
-You can also download it from the Microsoft Store:
+If you want to get a unified update experience provided by the Microsoft Store, you can also choose to download it from the Microsoft Store:
+
 <a href="https://apps.microsoft.com/detail/9nqq6z539qv2?referrer=appbadge&mode=direct">
-<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
-
-The Microsoft Store version is maintained by Microsoft for updates, and Super Hash will not check for updates at startup.
 
 ## 📸 Screenshots
 
-|                            Main Interface (Light Mode)                             |
-| :--------------------------------------------------------------------------------: |
-| ![Main Interface (Light Mode)](https://s2.loli.net/2024/10/25/rF6tqainNAcDvIk.png) |
-|                             Main Interface (Dark Mode)                             |
-| ![Main Interface (Dark Mode)](https://s2.loli.net/2024/10/25/uNl58FGETgfKUXm.png)  |
-|                                Generate Hash Value                                 |
-|     ![Generate Hash Value](https://s2.loli.net/2024/10/25/PGMvEINligBXVU7.png)     |
-|                            Verify Hash Value (Success)                             |
-| ![Verify Hash Value (Success)](https://s2.loli.net/2024/10/25/JuqDTbxnCzNdojp.png) |
-|                             Verify Hash Value (failed)                             |
-| ![Verify Hash Value (Failed)](https://s2.loli.net/2024/10/25/wdT24e6V8XHBIvc.png)  |
-|                                      Settings                                      |
-|          ![Settings](https://s2.loli.net/2024/10/25/vsPNTWAnEIakq1z.png)           |
-|                                       About                                        |
-|            ![About](https://s2.loli.net/2024/10/25/aXfqTlFtBnevDrQ.png)            |
+| Home (Light) | Home (Dark) |
+| --- | --- |
+| ![Home (Light)](https://files.seeusercontent.com/2026/07/29/C8eb/Super-Hash_EN_main-light.png) | ![Home (Dark)](https://files.seeusercontent.com/2026/07/29/b1Wq/Super-Hash_EN_main-dark.png) |
+| Generate hash | Check hash |
+| ![Generate hash](https://files.seeusercontent.com/2026/07/29/Zyw3/Super-Hash_EN_generate-hash.png) | ![Check hash](https://files.seeusercontent.com/2026/07/29/Z2yl/Super-Hash_EN_check-hash.png) |
+| Settings | Customize theme color |
+| ![Settings](https://files.seeusercontent.com/2026/07/29/8dBg/Super-Hash_EN_settings.png) | ![Customize theme color](https://files.seeusercontent.com/2026/07/29/1Sty/Super-Hash_EN_theme-color.png) |
 
 ## 💻 Developer
 
 - Super12138
 
+## 📚 Contribution
+
+If you want to contribute to Super Hash, please read [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+
 ## 🚀 Open Source Library
 
-- [Wails](https://github.com/wailsapp/wails)
-- [Tauri](https://github.com/tauri-apps/tauri)
-- [MDUI](https://github.com/zdhxiong/mdui)
+- [Vue.js](https://github.com/vuejs/core)
+- [Pinia](https://github.com/vuejs/pinia)
+- [Vite](https://github.com/vitejs/vite)
 - [CryptoJS](https://github.com/brix/crypto-js)
-- [jsdiff](https://github.com/kpdecker/jsdiff)
-- [marked](https://github.com/markedjs/marked)
+- [MDUI](https://github.com/zdhxiong/mdui)
+- [Tauri](https://github.com/tauri-apps/tauri)
+- [SemVer](https://github.com/semver/semver)
+- [markdown-it](https://github.com/markdown-it/markdown-it)
+- [pinia-plugin-persistedstate](https://github.com/prazdevs/pinia-plugin-persistedstate)
+- [Vue I18n](https://github.com/intlify/vue-i18n)
+- [VueUse](https://github.com/vueuse/vueuse)
+- [Vite PWA](https://github.com/vite-pwa/vite-plugin-pwa)
