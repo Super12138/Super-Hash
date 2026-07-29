@@ -40,7 +40,12 @@ const buildTime = BUILD_TIME;
         ref="dialog"
         style="text-align: center"
     >
-        <img width="120px" height="120px" src="../../../assets/icon.webp" />
+        <img
+            width="120px"
+            height="120px"
+            src="../../../assets/icon.webp"
+            alt="Super Hash 应用图标"
+        />
         <h2 style="margin-top: 10px; margin-bottom: 5px">Super Hash</h2>
 
         <p style="margin-top: 5px">
@@ -60,7 +65,7 @@ const buildTime = BUILD_TIME;
             <a target="_blank" href="https://github.com/Super12138/">Super12138</a>
             {{ t("settings.about.dialog.author.suffix") }}
         </p>
-        <img width="35%" src="../../../assets/gpl.svg" />
+        <img width="35%" src="../../../assets/gpl.svg" alt="GPL-3.0 许可证徽标" />
         <p>
             <a target="_blank" href="https://github.com/Super12138/Super-Hash/blob/main/LICENSE">
                 {{ t("settings.about.dialog.licence") }}
