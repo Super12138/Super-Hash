@@ -11,5 +11,5 @@ export default defineConfig({
             quality: 85,
         },
     },
-    images: ["public/icon.png"],
+    images: ["public/icon.png"], // 仅用于生成PWA图标，在构建时会自动删除它。请勿引用。
 });

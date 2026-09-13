@@ -10,7 +10,7 @@ import { createHtmlPlugin } from "vite-plugin-html";
 import { VitePWA } from "vite-plugin-pwa";
 import vueDevTools from "vite-plugin-vue-devtools";
 
-import packageJson from "./package.json";
+import packageJson from "./package.json" with { type: "json" };
 
 const execPromise = promisify(exec);
 
@@ -21,8 +21,6 @@ const host = process.env.TAURI_DEV_HOST;
  *
  * * 版本号：Git 提交计数
  * * 提交哈希：Git 短哈希
- *
- * @returns { versionCode: string, commitHash: string }
  */
 const getVersionInfo = async () => {
     try {
@@ -200,11 +198,15 @@ export default defineConfig(async ({ command, mode }) => {
 /**
  * Edit from: https://github.com/guangzan/vite-plugin-ignore-public/blob/main/src/index.ts
  * MIT License: https://github.com/guangzan/vite-plugin-ignore-public/blob/main/LICENSE
+ * 
+ * 用于在构建产物中忽略某些插件生成的文件
+ * 
+ * @param filePaths 要忽略的文件路径。相对于构建产物目录（如dist）的路径。比如`icon.png`代表`dist/icon.png`。
  *
  * @author guangzan
  * @author Super12138
  */
-function IgnoreFilesPlugin(...files: string[]): Plugin {
+function IgnoreFilesPlugin(...filePaths: string[]): Plugin {
     let config: ResolvedConfig;
 
     return {
@@ -214,8 +216,8 @@ function IgnoreFilesPlugin(...files: string[]): Plugin {
         },
         // 不能使用buildEnd，因为buildEnd触发时还没有把构建产物写入到dist文件夹
         closeBundle() {
-            for (const file of files) {
-                rm(resolve(`${config.build.outDir}/${file}`), { recursive: true });
+            for (const path of filePaths) {
+                rm(resolve(`${config.build.outDir}/${path}`), { recursive: true });
             }
         },
     };
