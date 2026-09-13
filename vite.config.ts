@@ -198,9 +198,9 @@ export default defineConfig(async ({ command, mode }) => {
 /**
  * Edit from: https://github.com/guangzan/vite-plugin-ignore-public/blob/main/src/index.ts
  * MIT License: https://github.com/guangzan/vite-plugin-ignore-public/blob/main/LICENSE
- * 
+ *
  * 用于在构建产物中忽略某些插件生成的文件
- * 
+ *
  * @param filePaths 要忽略的文件路径。相对于构建产物目录（如dist）的路径。比如`icon.png`代表`dist/icon.png`。
  *
  * @author guangzan

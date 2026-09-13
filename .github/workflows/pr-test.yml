@@ -1,10 +1,9 @@
-name: Build Desktop App
+name: PR Test
 
 on:
-  push:
+  pull_request:
     branches: ["main"]
     paths-ignore: ["**.md", "LICENSE", ".gitignore", ".github/ISSUE_TEMPLATE/**"]
-  workflow_dispatch:
 
 env:
   NODE_OPTIONS: "--max-old-space-size=4096"
@@ -17,42 +16,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Windows x64
           - platform: windows-latest
             name: "Windows x64"
             args: ""
 
-          # Windows x32
-          - platform: windows-latest
-            name: "Windows x32"
-            args: "--target i686-pc-windows-msvc"
-
-          # Windows arm64
-          # - platform: windows-latest
-          # name: 'Windows arm64'
-          # args: '--target aarch64-pc-windows-msvc'
-
-          # 通用版
           - platform: macos-latest
             name: "macOS Universal"
             args: "--target universal-apple-darwin"
-
-          # Apple 芯片版（Arm 架构）
-          - platform: macos-latest
-            name: "macOS arm64"
-            args: "--target aarch64-apple-darwin"
-
-          # Intel 芯片版
-          - platform: macos-latest
-            name: "macOS x64"
-            args: "--target x86_64-apple-darwin"
 
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
-        with:
-          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6.1.0
@@ -63,18 +38,13 @@ jobs:
         uses: actions/setup-node@v7.0.0
         with:
           node-version: 24
-          cache: pnpm
+          cache: ""
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
           # 这个 target 仅在 macOS 上使用，因此将其放在 if 语句中，以稍微加快 Windows 和 Linux 的构建速度
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-
-      - name: Rust cache
-        uses: swatinem/rust-cache@v2.9.2
-        with:
-          workspaces: ./src-tauri -> target
 
       - name: Install dependencies
         run: pnpm install
@@ -83,19 +53,5 @@ jobs:
         uses: tauri-apps/tauri-action@v1.0.0
         with:
           args: ${{ matrix.args }}
-        #  tagName: __VERSION__
-        #  releaseName: __VERSION__
-        #  releaseBody: ""
-        #  releaseDraft: true
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
-
-      - name: Upload artifact
-        if: success() && github.event_name != 'pull_request' && github.repository == 'Super12138/Super-Hash'
-        uses: actions/upload-artifact@v7.0.1
-        with:
-          name: ${{ matrix.name }}
-          path: |
-            src-tauri/target/**/release/bundle/**/*
-            src-tauri/target/**/release/Super Hash.exe
-            src-tauri/target/**/release/Super Hash

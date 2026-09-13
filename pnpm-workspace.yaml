@@ -3,4 +3,4 @@ allowBuilds:
     esbuild: true
     workerd: true
 minimumReleaseAgeExclude:
-  - '@vite-pwa/assets-generator@2.0.0'
+    - "@vite-pwa/assets-generator@2.0.0"
